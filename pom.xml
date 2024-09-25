@@ -1,28 +1,60 @@
+<!-- Início do projeto Maven, que define as configurações do projeto -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    
+    <!-- Versão do modelo do POM -->
     <modelVersion>4.0.0</modelVersion>
     <groupId>liryou</groupId>
     <artifactId>assistenteVirtualEducacionalSIGA</artifactId>
     <version>1.0</version>
+    <!-- Define o formato do projeto que será gerado. "war" significa que será um arquivo web (Web Application Archive) -->
     <packaging>war</packaging>
     <name>assistenteVirtualEducacionalSIGA-1.0</name>
     
     <properties>
+        <!-- Define o encoding do projeto como UTF-8, garantindo que todos os caracteres sejam reconhecidos corretamente -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jakartaee>10.0.0</jakartaee>
     </properties>
     
+    <!-- Dependências que o projeto precisa para funcionar corretamente -->
     <dependencies>
+        <!-- Dependência do Jakarta EE, que contém várias APIs e bibliotecas para desenvolvimento de aplicações web -->
         <dependency>
             <groupId>jakarta.platform</groupId>
             <artifactId>jakarta.jakartaee-api</artifactId>
             <version>${jakartaee}</version>
             <scope>provided</scope>
         </dependency>
+        
+        <!-- Dependência do Selenium, que é uma ferramenta para automação de testes e raspagem de dados em navegadores -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-api</artifactId>
+            <version>4.24.0</version>
+            <type>jar</type>
+        </dependency>
+        
+        <!-- Outra dependência do Selenium, o HtmlUnit Driver, que permite simular um navegador invisível -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>htmlunit-driver</artifactId>
+            <version>4.13.0</version>
+            <type>jar</type>
+        </dependency>
+        
+        <!-- Dependência do Gson, que é uma biblioteca para converter objetos Java em JSON e vice-versa -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.8.9</version>
+        </dependency>
     </dependencies>
     
+    <!-- Configurações relacionadas ao processo de construção do projeto -->
     <build>
         <plugins>
+            <!-- Plugin Maven que compila o código Java do projeto -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -32,6 +64,8 @@
                     <target>11</target>
                 </configuration>
             </plugin>
+            
+            <!-- Plugin Maven responsável por empacotar o projeto como um arquivo WAR (para aplicações web) -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
