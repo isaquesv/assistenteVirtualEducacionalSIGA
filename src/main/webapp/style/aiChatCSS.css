@@ -1,0 +1,45 @@
+/*  CSS da página aiChatCSS.jsp */
+div.container header, div.container footer {
+    background-color: #f0f0f0;
+    padding: 20px;
+}
+
+div.container main {
+    flex: 1;    /* Ocupando todo o espaço restante */
+    overflow-y: auto;
+}
+
+/*  Caixa de mensagem */
+.message-container {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px 15px 20px;
+    border-radius: 10px;
+    background-color: #f0f0f0;
+    margin-bottom: 10px;
+    position: relative;
+    max-width: 80%;
+}
+
+/*  Seta da caixa de mensagem */
+.message-arrow {
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    position: absolute;
+    top: 20%;
+    transform: translateY(-20%);
+}
+
+/*  Seta para a esquerda */
+.message-answer .message-arrow {
+    border-right: 10px solid #f0f0f0;
+    left: -10px;
+}
+
+/*  Seta para a direita */
+.message-question .message-arrow {
+    border-left: 10px solid #f0f0f0;
+    right: -10px;
+}
