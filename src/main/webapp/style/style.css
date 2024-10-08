@@ -1,0 +1,79 @@
+/*  CSS geral presentes nas páginas */
+
+/*  Reset básico para garantir consistência entre navegadores */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/*  Estilização geral do body */
+body {
+  font-family: "Kanit", sans-serif;
+  font-weight: 400;
+  background-color: rgb(250, 235, 227);
+  height: 100vh;
+  display: flex;
+  flex-direction: column; /*  Organizando o conteúdo verticalmente */
+}
+
+.quadrado {
+    
+    background-color: rgb(255, 250, 245); /* Cor de fundo do quadrado */
+    display: flex;
+    flex-direction: column; /* Alinha os elementos em coluna */
+    justify-content: center; /* Centraliza verticalmente */
+    align-items: center; /* Centraliza horizontalmente */
+    border: 50px solid rgb(255, 250, 245); /* Borda do quadrado */
+    box-sizing: border-box; /* Inclui padding e border no tamanho total */
+    text-align: center; /* Centraliza o texto dos títulos */
+    font-family: "Kanit", sans-serif;
+    font-weight: 400;
+}
+.quadrado h2 {
+    color: rgb(20, 5, 0); /* Mude para a cor desejada */
+}
+
+.quadrado h3 {
+    color: rgb(20, 5, 0); /* Mude para a cor desejada */
+}
+
+
+/*  Main - conteúdo principal */
+main.content {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto; /*  Centralizando o conteúdo */
+  flex: 1; /*  O conteúdo principal se expande para preencher o espaço disponível */
+}
+
+/*  Container para o conteúdo principal */
+main.content div.container {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0;
+}
+
+/*  Estilização para telas menores que 1440px */
+@media (max-width: 1440px) {
+  main.content div.container {
+    padding: 0 20px;
+  }
+}
+
+/*  Estilização para telas menores que 768px */
+@media (max-width: 768px) {
+    
+}
+
+.container h3 {
+ color: rgb(130, 0, 0);
+ text-align: center;
+}
+
+
+#bem-vindo {
+  color: rgb(20, 5, 0);
+  text-align: center;
+  font-family: "Lobster", sans-serif;
+}
