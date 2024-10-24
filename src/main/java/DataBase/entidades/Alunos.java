@@ -1,4 +1,3 @@
-
 package DataBase.entidades;
 
 import java.sql.Connection;
