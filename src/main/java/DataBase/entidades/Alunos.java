@@ -1,43 +1,13 @@
-package com.mycompany.database;
+
+package DataBase.entidades;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class DataBase {
-
-    public static void main(String[] args) {
-        Connection connection = null;
-
-        try {
-            // Cria a conexão com o banco de dados SQLite
-            connection = DriverManager.getConnection("jdbc:sqlite:edusiga.db");
-            Statement statement = connection.createStatement();
-            statement.setQueryTimeout(30);  // Espera até 30 segundos para conectar
-
-            // Cria e manipula a tabela 'alunos'
-            statement.executeUpdate("CREATE TABLE IF NOT EXISTS alunos (cd_aluno INTEGER PRIMARY KEY, cpf_aluno VARCHAR(11) NOT NULL, is_aluno_ativo TINYINT(1) NOT NULL)");
-            
-            // Teste capturar aluno específico
-            SelectAluno(connection, statement, "57822308866");
-            InsertAluno(connection, statement, "51392175895");
-            //UpdateStatusAluno(connection, statement, "57822308866");
-        } catch (SQLException e) {
-            // Erro de conexão ou execução
-            System.err.println(e.getMessage());
-        } finally {
-            try {
-                if (connection != null) {
-                    connection.close();
-                }
-            } catch (SQLException e) {
-                System.err.println(e.getMessage());
-            }
-        }
-    }
+public interface Alunos {
     
     public static void SelectAluno(Connection connection, Statement statement, String cpf) {
         try {
@@ -93,3 +63,5 @@ public class DataBase {
         }
     }
 }
+    
+
