@@ -1,8 +1,8 @@
 package DataBase.tabelas;
 
-import DataBase.entidades.Unidade_Ensino;
-import DataBase.entidades.Alunos;
-import DataBase.entidades.Cursos;
+import DataBase.consultasSQL.Unidade_Ensino;
+import DataBase.consultasSQL.Alunos;
+import DataBase.consultasSQL.Cursos;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -26,10 +26,12 @@ public class Tabelas implements  Alunos, Unidade_Ensino, Cursos{
             // Cria tabela Unidades_Ensino
             statement.executeUpdate("CREATE TABLE IF NOT EXISTS unidades_ensino (" + "cd_unidade_ensino INTEGER PRIMARY KEY, " + "nm_unidade_ensino VARCHAR(100) NOT NULL, " +
                                     "ds_endereco_unidade_ensino VARCHAR(255), " + "ds_unidade_ensino VARCHAR(3500))");
-            // Cria tabela Cursos 
+            // Cria tabela Cursos
             statement.executeUpdate("CREATE TABLE IF NOT EXISTS cursos (" + "cd_curso INTEGER PRIMARY KEY, " + "nm_curso VARCHAR(100) NOT NULL, " +
                                     "sg_curso VARCHAR(10), " + "ds_curso VARCHAR(2700))");
-            
+            // Cria tabela Unidade_Ensino_Curso
+            statement.executeUpdate("CREATE TABLE IF NOT EXISTS UNIDADES_ENSINO_CURSOS (" + "id_unidade_ensino INTEGER NOT NULL, " + "id_curso INTEGER NOT NULL, " +
+                                   "PRIMARY KEY (id_unidade_ensino, id_curso)" + ")");                        
             
         } catch (SQLException e) {
             // Erro de conexão ou execução

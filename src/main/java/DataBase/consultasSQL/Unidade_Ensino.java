@@ -1,4 +1,4 @@
-package DataBase.entidades;
+package DataBase.consultasSQL;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
