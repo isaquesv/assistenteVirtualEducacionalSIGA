@@ -31,7 +31,9 @@ public class Tabelas implements  Alunos, Unidade_Ensino, Cursos{
                                     "sg_curso VARCHAR(10), " + "ds_curso VARCHAR(2700))");
             // Cria tabela Unidade_Ensino_Curso
             statement.executeUpdate("CREATE TABLE IF NOT EXISTS UNIDADES_ENSINO_CURSOS (" + "id_unidade_ensino INTEGER NOT NULL, " + "id_curso INTEGER NOT NULL, " +
-                                   "PRIMARY KEY (id_unidade_ensino, id_curso)" + ")");                        
+                                   "PRIMARY KEY (id_unidade_ensino, id_curso)" + ")");     
+            // Cria tabela Conversas
+            statement.executeUpdate("CREATE TABLE IF NOT EXISTS CONVERSAS (" + "cd_conversa INTEGER PRIMARY KEY, " + "id_aluno INTEGER NOT NULL" + ")");
             
         } catch (SQLException e) {
             // Erro de conexão ou execução
