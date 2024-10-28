@@ -1,0 +1,164 @@
+/*  CSS das navbars e footers presentes nas páginas */
+
+/* Navbar - Barra de navegação fixa no topo */
+header.navbar {
+    width: 100%;
+    position: fixed;
+    /* Fixa a navbar no topo e ocupa 100% da largura */
+}
+
+/* Padronização de estilos para Navbar e Footer */
+header.navbar,
+div#navbarToggleExternalContent,
+footer.footer {
+    background-color: #333;
+    color: white;
+    /* Fundo escuro e texto branco */
+}
+
+div#navbarToggleExternalContent {
+    border-top: 1px solid #595959;
+}
+
+/* Container dentro da Navbar e do Footer - alinhamento e limite de largura */
+header.navbar div.container,
+footer.footer div.container {
+    max-width: 1440px;
+    margin: 0 auto;
+    /* Centraliza o conteúdo com largura máxima de 1440px */
+}
+
+header.navbar div.container,
+header.navbar div.container nav,
+footer.footer div.container {
+    display: flex;
+    align-items: center;
+    /* Alinhamento vertical centralizado */
+}
+
+/* Estilização do menu de navegação na Navbar */
+header.navbar div.container nav ul {
+    display: flex;
+    /* Itens do menu são dispostos horizontalmente */
+}
+
+header.navbar div.container nav ul,
+div#navbarToggleExternalContent nav ul {
+    list-style: none;
+    /* Remove os marcadores das listas */
+}
+
+/* Espaçamento entre os itens do menu, exceto o primeiro */
+header.navbar div.container nav ul li:not(:nth-child(1)) {
+    margin-left: 30px;
+}
+
+/* Esconde o 6º item do menu (para desktop) */
+header.navbar div.container nav ul li:nth-child(6) {
+    display: none;
+}
+
+/* Estilo dos itens da Navbar expansível (para mobile) */
+div#navbarToggleExternalContent nav ul li {
+    padding: 8px;
+    /* Adiciona padding interno nos itens da lista */
+}
+
+/* Borda inferior para itens da Navbar expansível, exceto o 5º */
+div#navbarToggleExternalContent nav ul li:not(:nth-child(5)) {
+    border-bottom: 1px solid #595959;
+}
+
+/* Estilização dos links da Navbar */
+ul li a {
+    font-weight: bold;
+}
+
+header.navbar div.container nav ul li a,
+div#navbarToggleExternalContent nav ul li a {
+    color: white;
+    padding-bottom: 2px;
+    text-decoration: none;
+    /* Remove o sublinhado dos links */
+}
+
+/* Estilo do link ativo na Navbar */
+header.navbar div.container nav ul li a.actived {
+    color: #969696;
+    cursor: default;
+    border-bottom: 2px solid #969696;
+    /* Cor diferente e borda inferior para o link ativo */
+}
+
+/* Hover - destaca links inativos ao passar o mouse */
+header.navbar div.container nav ul li a:not(.actived):hover {
+    border-bottom: 2px solid white;
+}
+
+/* Links da Navbar expansível (mobile) ocupam 100% da largura */
+div#navbarToggleExternalContent nav ul li a {
+    display: flex;
+    width: 100%;
+}
+
+/* Estilização do link ativo na Navbar expansível */
+div#navbarToggleExternalContent nav ul li a.actived {
+    color: #969696;
+}
+
+/* Footer (Rodapé) - Centraliza o conteúdo */
+footer.footer div.container {
+    justify-content: center;
+}
+
+/* Media Queries - Ajustes para telas menores */
+
+/* Para telas menores que 1440px */
+@media (max-width: 1440px) {
+    header.navbar div.container,
+    footer.footer div.container {
+        padding: 0 20px;
+        /* Adiciona espaçamento lateral nas seções */
+    }
+}
+
+/* Para telas menores que 768px - layout responsivo para dispositivos móveis */
+@media (max-width: 768px) {
+
+    /* Remove o espaçamento entre itens do menu */
+    header.navbar div.container nav ul li:not(:nth-child(1)) {
+        margin-left: 0;
+    }
+
+    /* Exibe o 6º item do menu e esconde os outros */
+    header.navbar div.container nav ul li:not(:nth-child(6)) {
+        display: none;
+    }
+
+    header.navbar div.container nav ul li:nth-child(6) {
+        display: block;
+        /* Mostra o item 6 */
+    }
+
+    header.navbar div.container nav ul li:nth-child(6) i {
+        font-size: 20px;
+        /* Aumenta o ícone no item 6 */
+    }
+
+    /* Alinha os itens do menu verticalmente */
+    header.navbar div.container nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Ajusta o padding dos itens da navbar expansível */
+    div#navbarToggleExternalContent nav ul li {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    /* Footer em coluna para telas menores */
+    footer.footer div.container {
+        flex-direction: column;
+    }
+}
