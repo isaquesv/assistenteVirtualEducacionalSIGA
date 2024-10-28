@@ -4,10 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public interface Conversas {
 
-    public static void selectConversa(Connection connection, int cdConversa) {
+    public static void SelectConversa(Connection connection, int cdConversa) {
         try {
             // Prepara o comando SQL de seleção
             PreparedStatement pstmt = connection.prepareStatement(
@@ -28,7 +29,7 @@ public interface Conversas {
         }
     }
 
-    public static void insertConversa(Connection connection, int cdConversa, int idAluno) {
+    public static void InsertConversa(Connection connection, int cdConversa, int idAluno) {
         try {
             // Prepara o comando SQL de inserção
             PreparedStatement pstmt = connection.prepareStatement(

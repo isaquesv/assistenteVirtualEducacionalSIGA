@@ -34,7 +34,11 @@ public class Tabelas implements  Alunos, Unidade_Ensino, Cursos{
                                    "PRIMARY KEY (id_unidade_ensino, id_curso)" + ")");     
             // Cria tabela Conversas
             statement.executeUpdate("CREATE TABLE IF NOT EXISTS CONVERSAS (" + "cd_conversa INTEGER PRIMARY KEY, " + "id_aluno INTEGER NOT NULL" + ")");
-            
+            // Cria tabela Mensagens
+            statement.executeUpdate("CREATE TABLE IF NOT EXISTS MENSAGENS (" + "cd_mensagem INTEGER PRIMARY KEY, " + "id_conversa INTEGER NOT NULL, " +
+                            "id_aluno INTEGER NOT NULL, " + "ds_mensagem TEXT, " + "is_enviada_por_ia TINYINT(1) NOT NULL, " + "is_mensagem_ativa TINYINT(1) NOT NULL, " +
+                            "dt_criacao_mensagem DATE NOT NULL" + ")");
+                    
         } catch (SQLException e) {
             // Erro de conexão ou execução
             System.err.println(e.getMessage());
