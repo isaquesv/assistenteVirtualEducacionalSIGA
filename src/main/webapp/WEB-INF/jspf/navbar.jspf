@@ -1,3 +1,66 @@
-<%-- any content can be specified here e.g.: --%>
-<%@ page pageEncoding="UTF-8" %>
-<h2>Hello World!</h2>
+<%-- Navbar presente nas páginas --%>
+<%
+    String urlAtual = request.getRequestURL().toString();
+    String[] urlPaginas = {"index.jsp", "createAccount.jsp", "accountLogin.jsp", "loginSIGA.jsp", "aiChat.jsp"};
+    String[] nomesPaginas = {"Início", "Cadastrar-se", "Login", "Login SIGA", "Chat IA"};
+%>
+<header class="navbar pt-3 pb-4">
+    <div class="container">
+        <h4 class="pt-1 m-0">EduSIGA</h4>
+        <nav>
+            <ul class="p-0 m-0">
+                <%
+                    for (int i = 0; i < nomesPaginas.length; i++) {
+                        if (i == 0 && urlAtual.endsWith("/")) {
+                            %>
+                                <li><a href="<%= urlPaginas[0] %>" class="actived"><%= nomesPaginas[0] %></a></li>
+                            <%
+                        } else {
+                            if (urlAtual.contains(urlPaginas[i])) {
+                                %>
+                                    <li><a href="<%= urlPaginas[i] %>" class="actived"><%= nomesPaginas[i] %></a></li>
+                                <%
+                            } else {
+                                %>
+                                    <li><a href="<%= urlPaginas[i] %>"><%= nomesPaginas[i] %></a></li>
+                                <%
+                            }
+                        }
+                    }
+                %>
+                <li class="pt-1">
+                    <button class="navbar-toggler p-1" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+                            aria-expanded="false" aria-label="Toggle navigation" style="border: 0;">
+                        <i class="fa-solid fa-bars text-white"></i>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<div class="collapse" id="navbarToggleExternalContent">
+    <nav>
+        <ul class="p-0 m-0">
+            <%
+                for (int i = 0; i < nomesPaginas.length; i++) {
+                    if (i == 0 && urlAtual.endsWith("/")) {
+                        %>
+                            <li><a href="<%= urlPaginas[0] %>" class="actived"><%= nomesPaginas[0] %></a></li>
+                        <%
+                    } else {
+                        if (urlAtual.contains(urlPaginas[i])) {
+                            %>
+                                <li><a href="<%= urlPaginas[i] %>" class="actived"><%= nomesPaginas[i] %></a></li>
+                            <%
+                        } else {
+                            %>
+                                <li><a href="<%= urlPaginas[i] %>"><%= nomesPaginas[i] %></a></li>
+                            <%
+                        }
+                    }
+                }
+            %>
+        </ul>
+    </nav>
+</div>
