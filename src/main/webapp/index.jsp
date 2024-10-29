@@ -1,3 +1,4 @@
+
 <%-- 
     Document   : index
     Created on : 25 de set. de 2024, 00:07:38
@@ -39,3 +40,4 @@
     <%-- Script --%>
     <script src="scripts/script.js"></script>
 </html>
+

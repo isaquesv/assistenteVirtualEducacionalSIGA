@@ -1,0 +1,98 @@
+.quadrado {
+    background-color: white; /* cor do quadrado com texto */
+    /* cor da borda do quadrado */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: 80px;
+    border-radius: 50px; /*quadrado com canto arredondado */
+    width: 600px;
+    height: 470px;
+   
+}
+
+/* estilização dos títulos dos campos */
+label[for="usuarioLoginSIGA"]{
+    display: flex;
+    font-weight: 400;
+    margin-bottom: 5px;
+    font-size: 25px;
+    justify-content:left;
+}
+
+label[for="senhaLoginSIGA"]{
+    display: flex;
+    font-weight: 400;
+    margin-bottom: 5px;
+    font-size: 25px;
+    justify-content: left;
+    margin-top:30px;
+}
+
+/* estilização do campo de inserção de cpf e senha*/
+input[type="text"], input[type="password"] {
+    width: 300px;
+    height: 50px;
+    padding: 20px;
+    font-size: 20px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    justify-content: center;
+    border:none;
+    
+
+}
+
+/* quando o usuário selecionar o campo de inserção de cpf e senha, o campo não ficará com outline */
+input[type="text"]:focus {
+    outline: none;
+}
+input[type="password"]:focus {
+    outline: none;
+}
+
+/* estilização do botão de entrar */
+input[type="submit"] {
+    margin-top: 30px;
+    background: linear-gradient(to right, #66416c, #ee7895);
+    color: white;
+
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 25px;
+    width: 150px;
+    height: 50px;
+    justify-content: center;
+    border: none;
+}
+
+input[type="submit"]:hover {
+    background-color: #4F2A3F;
+}
+
+.quadrado h1{
+    font-size: 30px;
+    font-weight: 500;
+    color:white;
+    background: linear-gradient(to right, #66416c, #ee7895);
+    padding: 10px;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    width: 100%;
+    margin-bottom: 0px;
+}
+
+.quadrado h2{
+    font-size: 20px;
+    font-weight: 500;
+    color: white;
+    margin-bottom: 30px;
+    background: linear-gradient(to right, #66416c, #ee7895);
+    width: 100%;
+    margin-top: 0px;
+    padding: 10px;
+    padding-top: 0px;
+    
+}
+

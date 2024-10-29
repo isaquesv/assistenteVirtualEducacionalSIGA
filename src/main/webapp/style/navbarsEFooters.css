@@ -4,20 +4,42 @@
 header.navbar {
     width: 100%;
     position: fixed;
+
+    z-index: 1;
+    box-shadow: 0px 15px 20px 0px rgba(0, 0, 0, 0.1);
+ 
+
     /* Fixa a navbar no topo e ocupa 100% da largura */
 }
 
 /* Padronização de estilos para Navbar e Footer */
 header.navbar,
-div#navbarToggleExternalContent,
-footer.footer {
-    background-color: #333;
-    color: white;
-    /* Fundo escuro e texto branco */
+
+div#navbarToggleExternalContent{
+    background: linear-gradient(to right, #66416c, #ee7895);
+    
 }
 
+footer.footer{
+    background: linear-gradient(to right, #66416c, #ee7895);
+    color:#ffffff;
+    
+}
+
+footer.footer a{
+    
+    color: white;
+    text-decoration: none;
+}
+
+footer.footer a:hover{
+color:#4F2A3F;
+font-weight: 600;
+}
+
+
 div#navbarToggleExternalContent {
-    border-top: 1px solid #595959;
+    border-top: 2px solid  black;
 }
 
 /* Container dentro da Navbar e do Footer - alinhamento e limite de largura */
@@ -50,7 +72,8 @@ div#navbarToggleExternalContent nav ul {
 
 /* Espaçamento entre os itens do menu, exceto o primeiro */
 header.navbar div.container nav ul li:not(:nth-child(1)) {
-    margin-left: 30px;
+    margin-left: 20px;
+  
 }
 
 /* Esconde o 6º item do menu (para desktop) */
@@ -66,33 +89,47 @@ div#navbarToggleExternalContent nav ul li {
 
 /* Borda inferior para itens da Navbar expansível, exceto o 5º */
 div#navbarToggleExternalContent nav ul li:not(:nth-child(5)) {
-    border-bottom: 1px solid #595959;
+    border-bottom: 1px solid white;
 }
 
 /* Estilização dos links da Navbar */
 ul li a {
-    font-weight: bold;
+
+    font-weight: 500;
+    background-color: white;
+    border-radius: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
+header.navbar div.container a,
 header.navbar div.container nav ul li a,
 div#navbarToggleExternalContent nav ul li a {
-    color: white;
-    padding-bottom: 2px;
+    color: black;
     text-decoration: none;
-    /* Remove o sublinhado dos links */
+    font-size: 20px;
+    /* Remove o sublinhado dos links */    
 }
+
 
 /* Estilo do link ativo na Navbar */
 header.navbar div.container nav ul li a.actived {
-    color: #969696;
     cursor: default;
-    border-bottom: 2px solid #969696;
+   color: #ee7895;
+    background-color: white;
+    border-radius: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-transform: uppercase;
+    font-size: 25px;
+
     /* Cor diferente e borda inferior para o link ativo */
 }
 
 /* Hover - destaca links inativos ao passar o mouse */
 header.navbar div.container nav ul li a:not(.actived):hover {
-    border-bottom: 2px solid white;
+   color: #ee7895;
+ 
 }
 
 /* Links da Navbar expansível (mobile) ocupam 100% da largura */
@@ -103,7 +140,7 @@ div#navbarToggleExternalContent nav ul li a {
 
 /* Estilização do link ativo na Navbar expansível */
 div#navbarToggleExternalContent nav ul li a.actived {
-    color: #969696;
+    color: #0ca5b0;
 }
 
 /* Footer (Rodapé) - Centraliza o conteúdo */
@@ -162,3 +199,4 @@ footer.footer div.container {
         flex-direction: column;
     }
 }
+

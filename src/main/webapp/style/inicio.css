@@ -1,0 +1,64 @@
+#quadrado {
+    background: linear-gradient(to right, #66416c, #ee7895); /* cor do quadrado com texto */
+    /* cor da borda do quadrado */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    box-sizing: border-box;
+    text-align: center;
+    margin-top: 50px;
+    border-radius: 50px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.quadrado h2, h3 {
+    color: white; /* cor do texto do quadrado */
+    margin-top: 30px;
+    
+}
+
+.quadrado h2 a{
+    color: white; /* cor do texto de dentro do quadrado com link de referência */
+    text-decoration: underline;
+}
+
+.quadrado h2 a:hover{
+    color: #3c365b;
+      /* cor do texto de dentro do quadrado com link de referência ao passar mouse por cima */
+}
+
+.container h3 {
+    color: #3c365b; /* cor do texto de Acesse */
+    text-align: center;
+    /* text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.2); */
+  
+    
+}
+
+.container h3 a{
+    color: #3c365b;
+    text-decoration: underline; 
+}
+
+
+
+.container h3 a:hover{
+    color: white;
+text-decoration: underline; /* cor do texto de Acesse ao passar o mouse */
+}
+
+#bem-vindo {
+    color: #66416c;
+    text-align: center;
+    font-family: "Lobster", sans-serif;
+ /*   text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.2); */
+    width: auto;
+    padding: 0px;
+    font-size: 60px;
+    
+    margin-top: 50px;
+    
+  }
