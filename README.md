@@ -30,7 +30,7 @@ Este projeto tem o objetivo de desenvolver um sistema integrado com a IA do <b>G
 * 4ª funcionalidade: editar o perfil, através da edição do nome e email do aluno;
 * 5ª funcionalidade: o usuário poderá apagar sua conta a qualquer momento.
 
-  # Acesso ao projeto
+# Acesso ao projeto
 Você pode baixar o projeto inteiro em sua máquina em <b><>Code</b>, e depois em <b>Download ZIP</b>.
 
 # Abrir e rodar o projeto
