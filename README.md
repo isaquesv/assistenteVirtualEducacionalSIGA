@@ -19,6 +19,7 @@ Projeto desenvolvido durante as aulas ministradas pelo professor [Ricardo Pupo L
 Este projeto tem o objetivo de desenvolver um sistema integrado com a IA do <b>Google (Gemini)</b> responsável por oferecer suporte aos alunos que utilizam do <b>“SIGA”</b>, ajudando com o aprendizado e respondendo dúvidas atreladas às informações acadêmicas do aluno.
 
 # Status do projeto
+<p align="center">
 <img loading="lazy" src="https://img.shields.io/badge/STATUS-em_andamento-projeto?style=flat-square&logoColor=white&labelColor=%2366416c&color=%23ee7895"/>
 
 # Funcionalidades do projeto
