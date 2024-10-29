@@ -3,6 +3,8 @@ package DataBase.tabelas;
 import DataBase.consultasSQL.Unidade_Ensino;
 import DataBase.consultasSQL.Alunos;
 import DataBase.consultasSQL.Cursos;
+import DataBase.consultasSQL.Mensagens;
+import DataBase.consultasSQL.Unidade_Ensino_Curso;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -10,7 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class Tabelas implements  Alunos, Unidade_Ensino, Cursos, Mensagens, Unidade_Ensino, Unidade_Ensino_Curso{
+public class Tabelas implements  Alunos, Unidade_Ensino, Cursos, Mensagens, Unidade_Ensino_Curso{
 
     public static void main(String[] args) {
         Connection connection = null;
