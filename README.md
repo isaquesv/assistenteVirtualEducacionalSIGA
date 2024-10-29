@@ -19,7 +19,6 @@ Projeto desenvolvido durante as aulas ministradas pelo professor [Ricardo Pupo L
 Este projeto tem o objetivo de desenvolver um sistema integrado com a IA do <b>Google (Gemini)</b> responsável por oferecer suporte aos alunos que utilizam do <b>“SIGA”</b>, ajudando com o aprendizado e respondendo dúvidas atreladas às informações acadêmicas do aluno.
 
 # Status do projeto
-<p align="center">
 <img loading="lazy" src="https://img.shields.io/badge/STATUS-em_andamento-projeto?style=flat-square&logoColor=white&labelColor=%2366416c&color=%23ee7895"/>
 
 # Funcionalidades do projeto
@@ -39,7 +38,7 @@ Feita a descompactação, recomendamos o uso da IDE <b>NetBeans</b> para a execu
 
 # Tecnologias utilizadas
 
-* <b>IDE<b>: Apache NetBeans 22;
+* <b>IDE</b>: Apache NetBeans 22;
 * <b>Java EE Version</b>: Jakarta EE 10 Web;
 * <b>Java Platform</b>: JDK 19;
 * <b>Server</b>: Glassfish 7.0;
@@ -55,7 +54,6 @@ Feita a descompactação, recomendamos o uso da IDE <b>NetBeans</b> para a execu
 <p>Ajax: é um gerenciador de requisições, ele permite que uma página envie e receba dados de um servidor de forma assíncrona.</p>
 
 # Autores
-[<p>Isaque Silva Venancio</p>](https://github.com/isaquesv)
-[<p>Luiza Carla Simões dos Santos</p>](https://github.com/luiza-carla)
-[<p>Ruan Fernandes Mendonça</p>](https://github.com/ruann-fernandess)
-
+* [Isaque Silva Venancio](https://github.com/isaquesv)
+* [Luiza Carla Simões dos Santos](https://github.com/luiza-carla)
+* [Ruan Fernandes Mendonça](https://github.com/ruann-fernandess)
