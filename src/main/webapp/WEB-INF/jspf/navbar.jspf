@@ -1,38 +1,86 @@
-<%-- Navbar presente nas p�ginas --%>
+<%-- Navbar presente em todas as páginas --%>
+<%@page import="org.json.JSONArray"%>
+<%@page import="org.json.JSONObject"%>
 <%
     String urlAtual = request.getRequestURL().toString();
-    String[] urlPaginas = {"index.jsp", "createAccount.jsp", "accountLogin.jsp", "loginSIGA.jsp", "aiChat.jsp"};
-    String[] nomesPaginas = {"In�cio", "Cadastrar-se", "Login", "Login SIGA", "Chat IA"};
+    String elementoFinalizarSessao = "";
+    String[] urlPaginas = {"index.jsp", "loginSIGA.jsp", "aiChat.jsp", "aboutProject.jsp", "apagarConta.jsp"};
+    String[] nomesPaginas = {"Início", "Login SIGA", "Chat IA", "Sobre o projeto", "Apagar conta"};
+    
+    String isSIGALogado = (String) session.getAttribute("isSIGALogado");
+    int codigoAluno;
+    int codigoConversa;
+    JSONObject estudante = new JSONObject();
+    JSONArray avisos = new JSONArray();
+    JSONArray planoDeEnsino = new JSONArray();
+    JSONArray historicoCompleto = new JSONArray();
+    JSONArray horariosPlanoDeEnsino = new JSONArray();
+
+    // Se o usuário não estiver logado no SIGA
+    if (isSIGALogado == null && (urlAtual.contains("aiChat.jsp") || urlAtual.contains("apagarConta.jsp"))) {
+        response.sendRedirect("loginSIGA.jsp");
+    }
+    // Se o usuário estiver logado no SIGA
+    else if (isSIGALogado != null) {
+        if (urlAtual.contains("loginSIGA.jsp") || urlAtual.contains("index.jsp") || urlAtual.endsWith("/")) {
+            response.sendRedirect("aiChat.jsp");
+        }
+        
+        codigoAluno = (Integer) session.getAttribute("codigoAluno");
+        codigoConversa = (Integer) session.getAttribute("codigoConversa");
+        estudante = (JSONObject) session.getAttribute("estudante");
+        avisos = (JSONArray) session.getAttribute("avisos");
+        planoDeEnsino = (JSONArray) session.getAttribute("planoDeEnsino");
+        historicoCompleto = (JSONArray) session.getAttribute("historicoCompleto");
+        horariosPlanoDeEnsino = (JSONArray) session.getAttribute("horariosPlanoDeEnsino");
+        
+        elementoFinalizarSessao =
+            "<li>" +
+                "<button class='logout' data-bs-toggle='modal' data-bs-target='#modalFinalizarSessao'>" +
+                    "<i class='bi bi-power'></i>" +
+                "</button>" +
+            "</li>";
+    }
 %>
+
 <header class="navbar pt-3 pb-4">
     <div class="container">
-        <h4 class="pt-1 m-0">EduSIGA</h4>
+        <a>
+            <h4 id="logo" class="pt-1 m-0">EduSIGA</h4>
+        </a>
         <nav>
             <ul class="p-0 m-0">
                 <%
                     for (int i = 0; i < nomesPaginas.length; i++) {
+                        // Ignorando a adição do link para a tela inicial e da tela de login no SIGA se o usuário já estiver logado
+                        if (isSIGALogado != null && (i == 0 || i == 1)) {
+                            continue;
+                        }
+                        // Ignorando a adição do link para a tela de apagar conta se o usuário não estiver logado no SIGA
+                        else if (isSIGALogado == null && i == 4) {
+                            continue;
+                        }
+
+                        // Caso a página atual seja a home
                         if (i == 0 && urlAtual.endsWith("/")) {
-                            %>
-                                <li><a href="<%= urlPaginas[0] %>" class="actived"><%= nomesPaginas[0] %></a></li>
-                            <%
+                            // Adiciona a classe 'actived' ao link
+                            out.print("<li><a href='" + urlPaginas[0] + "' class='actived'>" + nomesPaginas[0] + "</a></li>");
                         } else {
+                            // Se a URL atual corresponde à URL da página, adiciona a class 'actived' ao link
                             if (urlAtual.contains(urlPaginas[i])) {
-                                %>
-                                    <li><a href="<%= urlPaginas[i] %>" class="actived"><%= nomesPaginas[i] %></a></li>
-                                <%
-                            } else {
-                                %>
-                                    <li><a href="<%= urlPaginas[i] %>"><%= nomesPaginas[i] %></a></li>
-                                <%
+                                out.print("<li><a href='" + urlPaginas[i] + "' class='actived'>" + nomesPaginas[i] + "</a></li>");
+                            }
+                            // Caso a URL atual não corresponda à URL da página
+                            else {
+                                out.print("<li><a href='" + urlPaginas[i] + "'>" + nomesPaginas[i] + "</a></li>");
                             }
                         }
                     }
+                    out.print(elementoFinalizarSessao);
                 %>
-                <li class="pt-1">
-                    <button class="navbar-toggler p-1" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
-                            aria-expanded="false" aria-label="Toggle navigation" style="border: 0;">
-                        <i class="fa-solid fa-bars text-white"></i>
+                <li id="botaoMobile" class="pt-1">
+                    <button class="navbar-toggler p-1" type="button" data-bs-toggle="collapse" id="buttonNavbarTelaPequena" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation" style="border: 0;">
+                        <i class="bi bi-list text-white"></i>
                     </button>
                 </li>
             </ul>
@@ -44,22 +92,31 @@
         <ul class="p-0 m-0">
             <%
                 for (int i = 0; i < nomesPaginas.length; i++) {
+                    // Ignorando a adição do link para a tela inicial e da tela de login no SIGA se o usuário já estiver logado
+                    if (isSIGALogado != null && (i == 0 || i == 1)) {
+                        continue;
+                    }
+                    // Ignorando a adição do link para a tela de apagar conta se o usuário não estiver logado no SIGA
+                    else if (isSIGALogado == null && i == 4) {
+                        continue;
+                    }
+
+                    // Caso a página atual seja a home
                     if (i == 0 && urlAtual.endsWith("/")) {
-                        %>
-                            <li><a href="<%= urlPaginas[0] %>" class="actived"><%= nomesPaginas[0] %></a></li>
-                        <%
+                        // Adiciona a classe 'actived' ao link
+                        out.print("<li><a href='" + urlPaginas[0] + "' class='actived'>" + nomesPaginas[0] + "</a></li>");
                     } else {
+                        // Se a URL atual corresponde à URL da página, adiciona a class 'actived' ao link
                         if (urlAtual.contains(urlPaginas[i])) {
-                            %>
-                                <li><a href="<%= urlPaginas[i] %>" class="actived"><%= nomesPaginas[i] %></a></li>
-                            <%
-                        } else {
-                            %>
-                                <li><a href="<%= urlPaginas[i] %>"><%= nomesPaginas[i] %></a></li>
-                            <%
+                            out.print("<li><a href='" + urlPaginas[i] + "' class='actived'>" + nomesPaginas[i] + "</a></li>");
+                        }
+                        // Caso a URL atual não corresponda à URL da página
+                        else {
+                            out.print("<li><a href='" + urlPaginas[i] + "'>" + nomesPaginas[i] + "</a></li>");
                         }
                     }
                 }
+                out.print(elementoFinalizarSessao);
             %>
         </ul>
     </nav>
