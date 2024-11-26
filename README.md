@@ -31,7 +31,7 @@ Este projeto tem o objetivo de desenvolver um sistema integrado com a IA do <b>G
 * 5ª funcionalidade: o usuário poderá apagar sua conta a qualquer momento.
 
 # Acesso ao projeto
-Você pode baixar o projeto inteiro em sua máquina em <b><>Code</b>, e depois em <b>Download ZIP</b>.
+Você pode baixar o projeto inteiro em sua máquina em <b><>Code</b>, e depois em <b>Download ZIP.</b>
 
 # Abrir e rodar o projeto
 Feito o download do projeto, pode ser necessário realizar a descompactação do arquivo em formato ZIP. Para isso, é recomendado o uso do WinRAR. 
@@ -47,7 +47,7 @@ Feita a descompactação, recomendamos o uso da IDE <b>NetBeans</b> para a execu
 * <b>Banco de dados</b>: SQLite.
   
 * <b>Bibliotecas</b>:
-<p>Gemini 1.5 Flash-8B: IA utilizada no projeto, modelo da série Gemini da Google, escolhida por ser uma versão com o menor custo por token entre todos os modelos da série Gemini.</p>
+<p>Gemini 1.5 Flash: IA utilizada no projeto, modelo da série Gemini da Google, escolhida por ser uma versão com o menor custo por token entre todos os modelos da série Gemini;</p>
 <p>HtmlUnit: simula um navegador da web sem interface gráfica, utlizado para o web scraping do SIGA;</p>
 <p>Selenium e Headless: o selenium é uma ferramenta que faz a simulação da interação do usuário, e o headless é um modo capaz de executar o navegador sem necessidade de interface gráfica. Utilizado nesse projeto para a automatização do processo de login no SIGA;</p>
 <p>Bootstrap 5: utilizada para criar layouts de página;</p>
