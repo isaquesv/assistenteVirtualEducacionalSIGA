@@ -25,17 +25,16 @@ Este projeto tem o objetivo de desenvolver um sistema integrado com a IA do <b>G
 # Funcionalidades do projeto
 
 * 1ª funcionalidade: realizar login através do SIGA, inserindo o CPF e senha;
-* 2ª funcionalidade: conversar com a IA assistente nomeada "EduSIGA", capacitada para responder perguntas sobre a FATEC de Praia Grande;
+* 2ª funcionalidade: conversar com a IA assistente nomeada "EduSIGA", capacitada para responder perguntas sobre a FATEC de Praia Grande e seus cursos;
 * 3ª funcionalidade: apagar conversa com o EduSIGA a qualquer momento;
-* 4ª funcionalidade: editar o perfil, através da edição do nome e email do aluno;
-* 5ª funcionalidade: o usuário poderá apagar sua conta a qualquer momento.
+* 4ª funcionalidade: o usuário poderá apagar sua conta a qualquer momento.
 
 # Acesso ao projeto
 Você pode baixar o projeto inteiro em sua máquina em <b><>Code</b>, e depois em <b>Download ZIP.</b>
 
 # Abrir e rodar o projeto
 Feito o download do projeto, pode ser necessário realizar a descompactação do arquivo em formato ZIP. Para isso, é recomendado o uso do WinRAR. 
-Feita a descompactação, recomendamos o uso da IDE <b>NetBeans</b> para a execução do projeto.
+Feita a descompactação, recomendamos o uso da IDE <b>NetBeans</b> para a execução do projeto, e a inserção da chave da IA no arquivo "IAGemini.java" para o funcionamento correto do EduSIGA.
 
 # Tecnologias utilizadas
 
