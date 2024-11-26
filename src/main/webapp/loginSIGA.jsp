@@ -8,104 +8,54 @@
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
-        <%@include file="WEB-INF/jspf/head.jspf" %>
-        <title>Login - Sistema SIGA</title>
-        <style>
-            .modal-background {
-                position: fixed;
-                display: none;
-                align-items: center;
-                justify-content: center;
-                z-index: 2; /*  Sobrepondo (posicionando acima dos outros elementos) */
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background-color: rgba(0, 0, 0, 0.5);
-            }
-
-            .loader {
-                border: 4px solid #f3f3f3;
-                border-top: 4px solid #3498db;
-                border-radius: 50%;
-                width: 40px;
-                height: 40px;
-                animation: spin 1s linear infinite;
-            }
-
-            @keyframes spin {
-                0% {
-                    transform: rotate(0deg);
-                }
-                100% {
-                    transform: rotate(360deg);
-                }
-            }
-
-            .loader-container {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-            }
-        </style>
+        <title>Login SIGA</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <%@include file="WEB-INF/jspf/html-head-libs.jspf" %>
+        <link rel="stylesheet" href="style/loginSIGA.css">
     </head>
     <body>
-        <%
-            String isUsuarioLogado = (String) session.getAttribute("isUsuarioLogado");
-            String isSIGALogado = (String) session.getAttribute("isSIGALogado");
-            
-            //  Se o usuário não estiver logado no site redireciona para index
-            if (isUsuarioLogado == null) {
-                //  Redireciona o usuário para 'index.jsp'
-                response.sendRedirect("index.jsp");
-            } else {
-                //  Se o usuário tiver validado seu SIGA anteriormente redireciona para aiChat
-                if (isSIGALogado != null) {
-                    //  Redireciona o usuário para 'aiChat.jsp'
-                    response.sendRedirect("aiChat.jsp");
-                }
-            }
-        %>
-        
         <%@include file="WEB-INF/jspf/navbar.jspf" %>
-        
-        <main class="content">
+
+        <main class="content" style="margin-top: 0;">    
             <div class="container">
-                <div>
-                    <label for="usuarioLoginSIGA">Usuário:</label>
-                    <input type="text" id="usuarioLoginSIGA" name="usuarioLogin" placeholder="Digite seu nome de usuário">
-                </div>
 
-                <div>
-                    <label for="senhaLoginSIGA">Senha:</label>
-                    <input type="password" id="senhaLoginSIGA" name="senhaLogin" placeholder="Digite sua senha">
-                </div>
+                <div class="quadrado ms-auto me-auto pt-0">
+                    <h1>Login SIGA</h1>
+                    <h2>Faça o login com o SIGA agora e inicie a conversa com o EduSIGA!</h2>
+                    <div>
+                        <label for="usuarioLoginSIGA">CPF</label>
+                        <input type="text" id="usuarioLoginSIGA" name="usuarioLogin" placeholder="Digite seu CPF">
+                    </div>
 
-                <input type="submit" id="confirmarLoginSIGA" name="confirmarLoginSIGA" title="Confirmar acesso" value="Confirmar">
+                    <div>
+                        <label for="senhaLoginSIGA">Senha</label>
+                        <input type="password" id="senhaLoginSIGA" name="senhaLogin" placeholder="Digite sua senha">
 
-                <div id="notificacaoErros" style="display: none;">
-                    <span style="color: red;">
-                        <small id="mensagemErro"></small>
-                    </span>
+                        <button id="mostrarSenha">
+                            <i id="iconeSenha" class="bi bi-eye"></i>
+                        </button>
+                    </div>
+
+                    <input type="submit" id="confirmarLoginSIGA" name="confirmarLoginSIGA" title="Confirmar acesso" value="Entrar">
+                    
+                    <div id="notificacoesErros">
+                        <span id="spanMensagemErroCPF"></span>
+                        <span id="spanMensagemErroSenha"></span>
+                        <span id="spanMensagemErroLogin"></span>
+                    </div>
                 </div>
             </div>
         </main>
-        
+
         <div class="modal-background" id="loadingModal">
             <div class="loader-container">
                 <div class="loader"></div>
-                <div class="mt-1 fw-bold text-white loading-text" style="font-size: 14px;">Validando dados...</div>
+                <div id="loading-text" class="mt-1 fw-bold text-white" style="font-size: 14px;"></div>
             </div>
         </div>
-        
+
         <%@include file="WEB-INF/jspf/footer.jspf" %>
+        <%@include file="WEB-INF/jspf/html-body-libs.jspf" %>
+        <script src="scripts/loginSIGA.js"></script>
     </body>
-    
-    <%-- Importando a biblioteca jQuery para permitir e facilitar o uso de AJAX --%>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <%-- Importando a biblioteca JS do Bootstrap para utilizar determinadas ações --%>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <%-- Script --%>
-    <script src="scripts/script.js"></script>
-    <script src="scripts/loginSIGA.js"></script>
 </html>
