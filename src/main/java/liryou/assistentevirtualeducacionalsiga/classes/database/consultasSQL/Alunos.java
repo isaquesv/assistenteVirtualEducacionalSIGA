@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 public interface Alunos {
     
-    public static int SelectAluno(Connection connectionBD, String cpfAluno) {
+    public static int SelectAluno(Connection connectionBD, String usuarioSIGA) {
         int codigoAluno = 0;
         
         try {
@@ -15,9 +15,9 @@ public interface Alunos {
             PreparedStatement pstmt = connectionBD.prepareStatement(
                 "SELECT * " +
                 "FROM alunos " +
-                "WHERE cpf_aluno = ?"
+                "WHERE usuario_aluno = ?"
             );
-            pstmt.setString(1, cpfAluno);
+            pstmt.setString(1, usuarioSIGA);
             
             // Executa a consulta
             ResultSet resultadoConsulta = pstmt.executeQuery();
@@ -33,7 +33,7 @@ public interface Alunos {
         return codigoAluno;
     }
     
-    public static int SelectAlunoStatusAtivo(Connection connectionBD, String cpfAluno) {
+    public static int SelectAlunoStatusAtivo(Connection connectionBD, String usuarioSIGA) {
         int statusContaAluno = 0;
         
         try {
@@ -41,9 +41,9 @@ public interface Alunos {
             PreparedStatement pstmt = connectionBD.prepareStatement(
                 "SELECT * " +
                 "FROM alunos " +
-                "WHERE cpf_aluno = ?"
+                "WHERE usuario_aluno = ?"
             );
-            pstmt.setString(1, cpfAluno);
+            pstmt.setString(1, usuarioSIGA);
             
             // Executa a consulta
             ResultSet resultadoConsulta = pstmt.executeQuery();
@@ -59,17 +59,17 @@ public interface Alunos {
         return statusContaAluno;
     }
     
-    public static int InsertAluno(Connection connectionBD, String cpfAluno){
+    public static int InsertAluno(Connection connectionBD, String usuarioSIGA){
         int codigoAlunoInserido = 0;
         
         try {
             // Prepara o comando SQL de inserção
             PreparedStatement pstmt = connectionBD.prepareStatement(
-                "INSERT INTO alunos(cpf_aluno, is_aluno_ativo) " +
+                "INSERT INTO alunos(usuario_aluno, is_aluno_ativo) " +
                 "VALUES(?, ?)",
                 PreparedStatement.RETURN_GENERATED_KEYS
             );
-            pstmt.setString(1, cpfAluno);
+            pstmt.setString(1, usuarioSIGA);
             pstmt.setInt(2, 1);
             
             // Executa a inserção
@@ -89,7 +89,7 @@ public interface Alunos {
         return codigoAlunoInserido;
     }
     
-    public static boolean UpdateStatusAluno(Connection connectionBD, String cpfAluno){
+    public static boolean UpdateStatusAluno(Connection connectionBD, String usuarioSIGA){
         boolean statusAlunoAtualizado = false;
         
         try {
@@ -97,9 +97,9 @@ public interface Alunos {
             PreparedStatement pstmt = connectionBD.prepareStatement(
                 "UPDATE alunos " +
                 "SET is_aluno_ativo = 1 - is_aluno_ativo " +
-                "WHERE cpf_aluno = ?"
+                "WHERE usuario_aluno = ?"
             );
-            pstmt.setString(1, cpfAluno);
+            pstmt.setString(1, usuarioSIGA);
 
             // Executa a inserção
             int atualizacaoBemSucedida = pstmt.executeUpdate();
