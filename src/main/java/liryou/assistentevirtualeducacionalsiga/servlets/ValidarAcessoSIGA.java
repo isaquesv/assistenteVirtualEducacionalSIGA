@@ -42,11 +42,11 @@ public class ValidarAcessoSIGA extends HttpServlet {
         HtmlUnitDriver driverNavegador = driverManager.getDriver();
 
         try {
-            if (request.getParameter("cpfSIGA") != null && request.getParameter("senhaSIGA") != null) {
+            if (request.getParameter("usuarioSIGA") != null && request.getParameter("senhaSIGA") != null) {
                 // Obtém a conexão e chama os métodos para criar tabelas e verificar tabelas vazias
                 connectionBD = DriverBD.getConnection();
 
-                String cpfSIGA = request.getParameter("cpfSIGA");
+                String usuarioSIGA = request.getParameter("usuarioSIGA");
                 String senhaSIGA = request.getParameter("senhaSIGA");
 
                 // Acessa a página de login do SIGA
@@ -56,12 +56,12 @@ public class ValidarAcessoSIGA extends HttpServlet {
                     mensagemResultadoValidacaoAcessoSIGA = "O SIGA está temporariamente fora do ar. Por favor, aguarde e tente novamente mais tarde.";
                 } else {
                     // Localizando os elementos do formulário de login na página
-                    WebElement loginFormSigaInputCpf = driverNavegador.findElement(By.cssSelector("#vSIS_USUARIOID"));
+                    WebElement loginFormSigaInputUsuario = driverNavegador.findElement(By.cssSelector("#vSIS_USUARIOID"));
                     WebElement loginFormSigaInputSenha = driverNavegador.findElement(By.cssSelector("#vSIS_USUARIOSENHA"));
                     WebElement loginFormSigaSubmitButton = driverNavegador.findElement(By.name("BTCONFIRMA"));
 
                     // Preenchendo o formulário com os dados fornecidos e submetendo-o
-                    loginFormSigaInputCpf.sendKeys(cpfSIGA);
+                    loginFormSigaInputUsuario.sendKeys(usuarioSIGA);
                     loginFormSigaInputSenha.sendKeys(senhaSIGA);
                     loginFormSigaSubmitButton.click();
 
@@ -73,10 +73,10 @@ public class ValidarAcessoSIGA extends HttpServlet {
 
                         if (nomeUnidade.equals("Faculdade de Tecnologia de Praia Grande")) {
 
-                            int codigoAluno = Alunos.SelectAluno(connectionBD, cpfSIGA);
-                            // Cadastra o aluno caso não exista um registro com o CPF informado
+                            int codigoAluno = Alunos.SelectAluno(connectionBD, usuarioSIGA);
+                            // Cadastra o aluno caso não exista um registro com o usuario informado
                             if (codigoAluno == 0) {
-                                codigoAluno = Alunos.InsertAluno(connectionBD, cpfSIGA);
+                                codigoAluno = Alunos.InsertAluno(connectionBD, usuarioSIGA);
                             }
 
                             int codigoConversa = Conversas.SelectConversa(connectionBD, codigoAluno);
@@ -86,10 +86,10 @@ public class ValidarAcessoSIGA extends HttpServlet {
                             }
 
                             if (codigoAluno > 0 && codigoConversa > 0) {
-                                int statusContaAlunoAtivoOuNao = Alunos.SelectAlunoStatusAtivo(connectionBD, cpfSIGA);
+                                int statusContaAlunoAtivoOuNao = Alunos.SelectAlunoStatusAtivo(connectionBD, usuarioSIGA);
                                 // Reativa a conta do aluno caso a conta estiver desativada
                                 if (statusContaAlunoAtivoOuNao == 0) {
-                                    Alunos.UpdateStatusAluno(connectionBD, cpfSIGA);
+                                    Alunos.UpdateStatusAluno(connectionBD, usuarioSIGA);
                                 }
 
                                 HttpSession session = request.getSession();
@@ -110,11 +110,11 @@ public class ValidarAcessoSIGA extends HttpServlet {
                             mensagemResultadoValidacaoAcessoSIGA = "O login SIGA informado pertence a uma instituição diferente da Fatec Praia Grande. Por favor, verifique e insira um login SIGA válido.";
                         }
                     } else {
-                        mensagemResultadoValidacaoAcessoSIGA = "Falha no login - Não confere CPF e Senha";
+                        mensagemResultadoValidacaoAcessoSIGA = "Falha no login - Não confere Usuário e Senha";
                     }
                 }
             } else {
-                mensagemResultadoValidacaoAcessoSIGA = "Falha ao receber parâmetros (cpf, senha)";
+                mensagemResultadoValidacaoAcessoSIGA = "Falha ao receber parâmetros (usuário, senha)";
             }
         } catch (Exception e) {
             mensagemResultadoValidacaoAcessoSIGA = e.getMessage();
