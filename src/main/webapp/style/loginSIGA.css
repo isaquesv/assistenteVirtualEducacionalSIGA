@@ -1,19 +1,18 @@
+/* CSS presente na página loginSIGA */
+
 .quadrado {
-    background-color: white; /* cor do quadrado com texto */
-    /* cor da borda do quadrado */
+    background-color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     margin-top: 80px;
-    border-radius: 50px; /*quadrado com canto arredondado */
+    border-radius: 50px;
     width: 600px;
     height: 470px;
-   
 }
 
-/* estilização dos títulos dos campos */
-label[for="usuarioLoginSIGA"]{
+label[for="usuarioLoginSIGA"] {
     display: flex;
     font-weight: 400;
     margin-bottom: 5px;
@@ -21,7 +20,7 @@ label[for="usuarioLoginSIGA"]{
     justify-content:left;
 }
 
-label[for="senhaLoginSIGA"]{
+label[for="senhaLoginSIGA"] {
     display: flex;
     font-weight: 400;
     margin-bottom: 5px;
@@ -30,7 +29,6 @@ label[for="senhaLoginSIGA"]{
     margin-top:30px;
 }
 
-/* estilização do campo de inserção de cpf e senha*/
 input[type="text"], input[type="password"] {
     width: 300px;
     height: 50px;
@@ -40,37 +38,57 @@ input[type="text"], input[type="password"] {
     box-sizing: border-box;
     justify-content: center;
     border:none;
-    
-
 }
 
-/* quando o usuário selecionar o campo de inserção de cpf e senha, o campo não ficará com outline */
 input[type="text"]:focus {
     outline: none;
 }
+
 input[type="password"]:focus {
     outline: none;
 }
 
-/* estilização do botão de entrar */
+#mostrarSenha{
+    border: none;
+    height: 50px;
+    width: 50px;
+    font-size: 30px;
+    display: flex;
+    position: relative;
+    bottom: 95px;
+    left: 80px;
+    justify-content: center;
+    background-color: white;
+    color: black;
+}
+
 input[type="submit"] {
     margin-top: 30px;
     background: linear-gradient(to right, #66416c, #ee7895);
     color: white;
-
     border-radius: 4px;
     cursor: pointer;
     font-size: 25px;
-    width: 150px;
-    height: 50px;
+    height: auto;
+    width: auto;
+    padding: 10px;
     justify-content: center;
     border: none;
+    position: relative;
+    bottom: 50px;
 }
 
 input[type="submit"]:hover {
     background-color: #4F2A3F;
 }
 
+div#notificacoesErros {
+    display: none;
+}
+span#spanMensagemErroUsuario, span#spanMensagemErroSenha, span#spanMensagemErroLogin {
+    color: red;
+}
+                    
 .quadrado h1{
     font-size: 30px;
     font-weight: 500;
@@ -93,6 +111,51 @@ input[type="submit"]:hover {
     margin-top: 0px;
     padding: 10px;
     padding-top: 0px;
+}
+
+/* Loading */
+.modal-background {
+    position: fixed;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    /* Sobrepondo (posicionando acima dos outros elementos) */
+    z-index: 2;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    font-size: 100px;    
+}
+
+.loader {
+    border: 6px solid #f3f3f3;
+    border-top: 6px solid #66416c;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loader-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     
 }
 
+#loading-text{
+    font-size: 50px;
+    font-weight: 300;
+    color: white;
+}
