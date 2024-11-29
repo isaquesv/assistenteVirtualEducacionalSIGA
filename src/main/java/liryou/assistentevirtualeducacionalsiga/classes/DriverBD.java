@@ -75,7 +75,7 @@ public class DriverBD implements Alunos, Unidades_Ensino, Cursos, Mensagens, Uni
         // Criando a tabela Alunos
         statement.executeUpdate(
             "CREATE TABLE IF NOT EXISTS alunos " +
-            "(cd_aluno INTEGER PRIMARY KEY, cpf_aluno VARCHAR(11) NOT NULL, is_aluno_ativo TINYINT(1) NOT NULL)"
+            "(cd_aluno INTEGER PRIMARY KEY, usuario_aluno VARCHAR(11) NOT NULL, is_aluno_ativo TINYINT(1) NOT NULL)"
         );
         // Criando a tabela Conversas
         statement.executeUpdate(
