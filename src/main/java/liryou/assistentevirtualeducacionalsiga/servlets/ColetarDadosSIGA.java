@@ -46,7 +46,7 @@ public class ColetarDadosSIGA extends HttpServlet {
 
     // Informações individuais
     static String nomeEstudante;
-    static String cpfEstudante;
+    static String usuarioSIGA;
     static String registroAcademico;
     static int semestreAtual;
     static float percentualDeProgressao;
@@ -89,12 +89,12 @@ public class ColetarDadosSIGA extends HttpServlet {
         HtmlUnitDriver driverNavegador = driverManager.getDriver();
         
         try {
-            if (request.getParameter("cpfSIGA") != null && request.getParameter("senhaSIGA") != null) { 
-                cpfEstudante = request.getParameter("cpfSIGA");
+            if (request.getParameter("usuarioSIGA") != null && request.getParameter("senhaSIGA") != null) { 
+                usuarioSIGA = request.getParameter("usuarioSIGA");
                 String senhaSIGA = request.getParameter("senhaSIGA");
                 
                 // Realiza o login no sistema SIGA utilizando os dados fornecidos
-                realizarLoginSIGA(driverNavegador, cpfEstudante, senhaSIGA);
+                realizarLoginSIGA(driverNavegador, usuarioSIGA, senhaSIGA);
                 
                 if (mensagemResultadoColetaDadosSIGA.equals("Sucesso coleta de dados")) {
                     // Saindo do SIGA
@@ -105,7 +105,7 @@ public class ColetarDadosSIGA extends HttpServlet {
                     criarSessionUsuarioLogado(request);
                 }
             } else {
-                mensagemResultadoColetaDadosSIGA = "Falha ao receber parâmetros (cpf, senha)";
+                mensagemResultadoColetaDadosSIGA = "Falha ao receber parâmetros (usuário, senha)";
             }
         } catch (Exception e) {
             mensagemResultadoColetaDadosSIGA = e.getMessage();
@@ -119,7 +119,7 @@ public class ColetarDadosSIGA extends HttpServlet {
         response.getWriter().print(mensagemResultadoColetaDadosSIGA);
     }
     
-    private static void realizarLoginSIGA(HtmlUnitDriver driverNavegador, String cpfSIGA, String senhaSIGA) throws InterruptedException {        
+    private static void realizarLoginSIGA(HtmlUnitDriver driverNavegador, String usuarioSIGA, String senhaSIGA) throws InterruptedException {        
         // Acessando a página de login do SIGA
         driverNavegador.get("https://siga.cps.sp.gov.br/aluno/login.aspx");
         Thread.sleep(3000);
@@ -128,12 +128,12 @@ public class ColetarDadosSIGA extends HttpServlet {
             mensagemResultadoColetaDadosSIGA = "O SIGA está temporariamente fora do ar. Por favor, aguarde e tente novamente mais tarde.";
         } else {            
             // Localizando os elementos do formulário de login na página
-            WebElement elementoLoginFormSigaInputCpf = driverNavegador.findElement(By.cssSelector("#vSIS_USUARIOID"));
+            WebElement elementoLoginFormSigaInputUsuario = driverNavegador.findElement(By.cssSelector("#vSIS_USUARIOID"));
             WebElement elementoLoginFormSigaInputSenha = driverNavegador.findElement(By.cssSelector("#vSIS_USUARIOSENHA"));
             WebElement elementoLoginFormSigaSubmitButton = driverNavegador.findElement(By.name("BTCONFIRMA"));
 
             // Preenchendo o formulário com os dados fornecidos e submetendo-o
-            elementoLoginFormSigaInputCpf.sendKeys(cpfSIGA);
+            elementoLoginFormSigaInputUsuario.sendKeys(usuarioSIGA);
             elementoLoginFormSigaInputSenha.sendKeys(senhaSIGA);
             elementoLoginFormSigaSubmitButton.click();
 
@@ -528,7 +528,7 @@ public class ColetarDadosSIGA extends HttpServlet {
     private static void atribuirValoresJSON() {
         // Informações individuais
         estudante.put("nome_estudante", nomeEstudante);
-        estudante.put("cpf_estudante", cpfEstudante);
+        estudante.put("usuario_SIGA", usuarioSIGA);
         estudante.put("registro_acadêmico", registroAcademico);
         estudante.put("semestre_atual", semestreAtual);
         estudante.put("percentual_progressão", percentualDeProgressao + "%");
