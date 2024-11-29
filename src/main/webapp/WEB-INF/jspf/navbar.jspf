@@ -8,13 +8,6 @@
     String[] nomesPaginas = {"Início", "Login SIGA", "Chat IA", "Sobre o projeto", "Apagar conta"};
     
     String isSIGALogado = (String) session.getAttribute("isSIGALogado");
-    int codigoAluno;
-    int codigoConversa;
-    JSONObject estudante = new JSONObject();
-    JSONArray avisos = new JSONArray();
-    JSONArray planoDeEnsino = new JSONArray();
-    JSONArray historicoCompleto = new JSONArray();
-    JSONArray horariosPlanoDeEnsino = new JSONArray();
 
     // Se o usuário não estiver logado no SIGA
     if (isSIGALogado == null && (urlAtual.contains("aiChat.jsp") || urlAtual.contains("apagarConta.jsp"))) {
@@ -25,14 +18,6 @@
         if (urlAtual.contains("loginSIGA.jsp") || urlAtual.contains("index.jsp") || urlAtual.endsWith("/")) {
             response.sendRedirect("aiChat.jsp");
         }
-        
-        codigoAluno = (Integer) session.getAttribute("codigoAluno");
-        codigoConversa = (Integer) session.getAttribute("codigoConversa");
-        estudante = (JSONObject) session.getAttribute("estudante");
-        avisos = (JSONArray) session.getAttribute("avisos");
-        planoDeEnsino = (JSONArray) session.getAttribute("planoDeEnsino");
-        historicoCompleto = (JSONArray) session.getAttribute("historicoCompleto");
-        horariosPlanoDeEnsino = (JSONArray) session.getAttribute("horariosPlanoDeEnsino");
         
         elementoFinalizarSessao =
             "<li>" +
