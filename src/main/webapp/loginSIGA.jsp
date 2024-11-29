@@ -39,7 +39,7 @@
                     <input type="submit" id="confirmarLoginSIGA" name="confirmarLoginSIGA" title="Confirmar acesso" value="Entrar">
                     
                     <div id="notificacoesErros">
-                        <span id="spanMensagemErroCPF"></span>
+                        <span id="spanMensagemErroUsuario"></span>
                         <span id="spanMensagemErroSenha"></span>
                         <span id="spanMensagemErroLogin"></span>
                     </div>
