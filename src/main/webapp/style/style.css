@@ -1,43 +1,94 @@
-/*  CSS geral presentes nas páginas */
+/* CSS presente em todas as páginas */
 
-/*  Reset básico para garantir consistência entre navegadores */
+/* Reset básico para garantir consistência entre navegadores */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/*  Estilização geral do body */
+/* Estilização geral do body */
 body {
-  font-family: Arial, Helvetica, sans-serif;
-  height: 100vh;
-  display: flex;
-  flex-direction: column; /*  Organizando o conteúdo verticalmente */
+    /* font-family: "Kanit", sans-serif; */
+    background-color: #edbbc7; 
+    height: 100vh;
+    display: flex;
+    /* Organizando o conteúdo verticalmente */
+    flex-direction: column;
 }
 
-/*  Main - conteúdo principal */
+/* Main - conteúdo principal */
 main.content {
-  width: 100%;
-  max-width: 1440px;
-  margin: 0 auto; /*  Centralizando o conteúdo */
-  flex: 1; /*  O conteúdo principal se expande para preencher o espaço disponível */
+    width: 100%;
+    max-width: 1440px;
+    /* Centralizando o conteúdo */
+    margin: 0 auto;
+    /* O conteúdo principal se expande para preencher o espaço disponível */
+    flex: 1;
 }
 
-/*  Container para o conteúdo principal */
+/* Container para o conteúdo principal */
 main.content div.container {
-  width: 100%;
-  max-width: 1440px;
-  margin: 0;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0;
 }
 
-/*  Estilização para telas menores que 1440px */
-@media (max-width: 1440px) {
-  main.content div.container {
-    padding: 0 20px;
-  }
+/* Modal finalizar sessão */
+/* título "excluir conta" */
+#modalFinalizarSessaoLabel {
+    color: white;
+    font-size: 40px;
 }
-
-/*  Estilização para telas menores que 768px */
-@media (max-width: 768px) {
     
+#modalFinalizarSessao {
+    color: white;
+    font-size: 30px;
+}
+ 
+.modal-content {
+    color: black;
+    background-color: white;
+    height: auto;
+    width: auto;
+}
+    
+/* Esse é o "x"*/
+.modal-header {
+    color:white;
+    background: linear-gradient(to right, #66416c, #ee7895);
+    font-size: 30px;
+}
+    
+.botaoNaoFinalizarSessao,
+.botaoSimFinalizarSessao {
+    height: auto;
+    width: auto;
+    padding: 10px;
+    font-size: 30px;
+    justify-content: center;    
+    border: 0px;
+    color: white;
+    border-radius: 10px;
+}
+
+.botaoNaoFinalizarSessao {
+    background-color: #66416c;
+}
+.botaoNaoFinalizarSessao:hover {
+    box-shadow: inset 0px 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.botaoSimFinalizarSessao {
+    background-color: #ee7895;
+}    
+.botaoSimFinalizarSessao:hover {
+    box-shadow: inset 0px 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilização para telas menores que 1440px */
+@media (max-width: 1440px) {
+    main.content div.container {
+        padding: 0 20px;
+    }
 }
