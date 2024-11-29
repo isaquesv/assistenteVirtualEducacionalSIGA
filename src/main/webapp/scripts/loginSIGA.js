@@ -1,96 +1,173 @@
-//  Executando ações assim que o conteúdo do documento estiver carregado
-document.addEventListener("DOMContentLoaded", function () {
-    const inputUsuario = document.querySelector("#usuarioLoginSIGA");
-    const inputSenha = document.querySelector("#senhaLoginSIGA");
-    const inputConfirmar = document.querySelector("#confirmarLoginSIGA");
+// Script JS presente na página loginSIGA
+const inputUsuario = document.querySelector("#usuarioLoginSIGA");
+const inputSenha = document.querySelector("#senhaLoginSIGA");
+const iconeExibirSenha = document.querySelector("#iconeSenha");
+const inputConfirmar = document.querySelector("#confirmarLoginSIGA");
 
-    //  Verificando se a tecla "Enter" foi pressionada enquanto um dos inputs estiver em foco
-    inputUsuario.addEventListener("keydown", (event) => {
-        if (event.key === "Enter") {
-            validandoAcessoSIGA(inputUsuario.value.trim(), inputSenha.value.trim());
-        }
-    });
-    inputSenha.addEventListener("keydown", (event) => {
-        if (event.key === "Enter") {
-            validandoAcessoSIGA(inputUsuario.value.trim(), inputSenha.value.trim());
-        }
-    });
+const modalLoading = document.querySelector("#loadingModal");
+const loadingText = document.querySelector("#loading-text");
 
-    inputConfirmar.addEventListener("click", function () {
-        validandoAcessoSIGA(inputUsuario.value.trim(), inputSenha.value.trim());
-    });
+// Deixando o campo de usuário em foco
+inputUsuario.focus();
+
+// Verificando se a tecla "Enter" foi pressionada enquanto um dos inputs estiver em foco
+inputUsuario.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+        validarAcessoSIGA(inputUsuario.value.trim(), inputSenha.value.trim());
+    }
+});
+inputSenha.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+        validarAcessoSIGA(inputUsuario.value.trim(), inputSenha.value.trim());
+    }
 });
 
-//  Função responsável por verificar se o acesso ao SIGA é válido ou não
-function validandoAcessoSIGA(usuarioSIGA, senhaSIGA) {
-    if (usuarioSIGA === "" && senhaSIGA === "") {
-        document.querySelector("#notificacaoErros").style.display = "block";
-        document.querySelector("#mensagemErro").innerHTML = "Usuário invalido - Forneça o usuário<br>Senha invalida - Forneça a senha";
+inputConfirmar.addEventListener("click", function() {
+    validarAcessoSIGA(inputUsuario.value.trim(), inputSenha.value.trim());
+});
+
+iconeExibirSenha.addEventListener("click", function() {
+    exibirSenha();
+});
+
+function exibirSenha() {
+    if (inputSenha.type === "password") {
+        // Exibe a senha
+        inputSenha.type = "text";
+        // Trocando ícones (olho normal -> olho riscado)
+        iconeExibirSenha.classList.remove("bi-eye");
+        iconeExibirSenha.classList.add("bi-eye-slash");
     } else {
-        if (usuarioSIGA === "") {
-            document.querySelector("#notificacaoErros").style.display = "block";
-            document.querySelector("#mensagemErro").innerHTML = "Usuário invalido - Forneça o usuário";
-        } else if (senhaSIGA === "") {
-            document.querySelector("#notificacaoErros").style.display = "block";
-            document.querySelector("#mensagemErro").innerHTML = "Senha invalida - Forneça a senha";
-        } else {
-            //  Exibindo o modal de loading
-            document.querySelector("#loadingModal").style.display = "flex";
-
-            //  Realizando uma requisição assíncrona ao servidor usando jQuery AJAX, permitindo validar o login do usuário dinamicamente sem recarregar a página
-            $.ajax({
-                method: "POST",
-                url: "validandoAcessoSIGA",
-                data: { //  Dados que serão enviados:
-                    usuarioSIGA: usuarioSIGA,
-                    senhaSIGA: senhaSIGA
-                },
-                success: function (response) {  //  Se a requisição for bem-sucedida:
-                    let isAcessoSIGAValido = response;
-
-                    if (isAcessoSIGAValido === "true") {
-                        coletandoDadosSIGA(usuarioSIGA, senhaSIGA);
-                    } else {
-                        //  Interrompendo o loading se a validação falhar
-                        document.querySelector("#loadingModal").style.display = "none";
-                        document.querySelector("#notificacaoErros").style.display = "block";
-                        document.querySelector("#mensagemErro").innerHTML = "Não confere Login e Senha";
-                    }
-                },
-                error: function (xhr, status, error) {  //  Se houver um erro na requisição:
-                    document.querySelector("#loadingModal").style.display = "none";
-                    document.querySelector("#notificacaoErros").style.display = "block";
-                    document.querySelector("#mensagemErro").innerHTML = "Desculpe, ocorreu um erro inesperado. Por favor, tente novamente mais tarde";
-                    console.log("Erro: " + error);
-                }
-            });
-        }
+        // Oculta a senha
+        inputSenha.type = "password";
+        // Trocando ícones (olho riscado -> olho normal)
+        iconeExibirSenha.classList.remove("bi-eye-slash");
+        iconeExibirSenha.classList.add("bi-eye");
     }
 }
 
-//  Função responsável por capturar os dados do SIGA
-function coletandoDadosSIGA(usuarioSIGA, senhaSIGA) {
-    //  Realizando uma requisição assíncrona ao servidor usando jQuery AJAX, permitindo a coleta de dados do SIGA do aluno dinamicamente sem recarregar a página
+function esconderOuExibirElemento(seletor, valorDisplay) {
+    const elemento = document.querySelector(seletor);
+    
+    if (elemento && elemento.style.display !== valorDisplay) {
+        elemento.style.display = valorDisplay;
+    }
+}
+
+function validarCampoUsuario(usuarioSIGA) {
+    if (usuarioSIGA === "") {
+        // Exibindo elementos e mensagem de erro
+        esconderOuExibirElemento("#notificacoesErros", "block");
+        esconderOuExibirElemento("span#spanMensagemErroUsuario", "block");
+        document.querySelector("span#spanMensagemErroUsuario").innerHTML = "Usuário invalido - Forneça o usuário";
+        
+        return false;
+    } else {
+        // Escondendo elementos e mensagem de erro
+        esconderOuExibirElemento("span#spanMensagemErroUsuario", "none");
+        document.querySelector("span#spanMensagemErroUsuario").innerHTML = "";
+        
+        return true;
+    }
+}
+
+function validarCampoSenha(senhaSIGA) {
+    if (senhaSIGA === "") {
+        // Exibindo elementos e mensagem de erro
+        esconderOuExibirElemento("#notificacoesErros", "block");
+        esconderOuExibirElemento("span#spanMensagemErroSenha", "block");
+        document.querySelector("span#spanMensagemErroSenha").innerHTML = "Senha invalida - Forneça a senha";
+
+        return false;
+    } else {
+        // Escondendo elementos e mensagem de erro
+        esconderOuExibirElemento("span#spanMensagemErroSenha", "none");
+        document.querySelector("span#spanMensagemErroSenha").innerHTML = "";
+        
+        return true;
+    }
+}
+
+function validarAcessoSIGA(usuarioSIGA, senhaSIGA) {
+    let resultadoValidacaoUsuario = validarCampoUsuario(usuarioSIGA);
+    let resultadoValidacaoSenha = validarCampoSenha(senhaSIGA);
+
+    if (resultadoValidacaoUsuario === true && resultadoValidacaoSenha === true) {  
+        // Escondendo elemento que armazena todas as mensagens de erro
+        esconderOuExibirElemento("#notificacoesErros", "none");
+
+        // Exibindo o modal de "loading"
+        esconderOuExibirElemento("#loadingModal", "flex");
+        
+        if (loadingText) {
+            loadingText.innerHTML = "Aguarde, estamos validando seus dados...";
+        }
+
+        // Realizando uma requisição assíncrona ao servidor usando jQuery AJAX, permitindo validar o login do usuário dinamicamente sem recarregar a página
+        $.ajax({
+            method: "POST",
+            url: "ValidarAcessoSIGA",
+            data: {
+                usuarioSIGA: usuarioSIGA,
+                senhaSIGA: senhaSIGA
+            },
+            success: function (response) {
+                let mensagemResultadoValidacaoAcessoSIGA = response;
+
+                if (mensagemResultadoValidacaoAcessoSIGA === "Sucesso no login") {
+                    esconderOuExibirElemento("span#spanMensagemErroLogin", "none");
+                    document.querySelector("span#spanMensagemErroLogin").innerHTML = "";
+                    document.querySelector("#loading-text").innerHTML = "Aguarde, estamos coletando os dados. Esta ação pode levar alguns instantes...";
+                    
+                    coletarDadosSIGA(usuarioSIGA, senhaSIGA);
+                } else {
+                    esconderOuExibirElemento("#notificacoesErros", "block");
+                    esconderOuExibirElemento("#loadingModal", "none");
+                    esconderOuExibirElemento("span#spanMensagemErroLogin", "block");
+                    document.querySelector("span#spanMensagemErroLogin").innerHTML = mensagemResultadoValidacaoAcessoSIGA;
+                }
+            },
+            error: function (xhr, status, error) {
+                esconderOuExibirElemento("#loadingModal", "none");
+                esconderOuExibirElemento("#notificacoesErros", "block");
+                esconderOuExibirElemento("span#spanMensagemErroLogin", "block");
+                document.querySelector("span#spanMensagemErroLogin").innerHTML = "Desculpe, ocorreu um erro inesperado. Por favor, execute este projeto novamente em sua IDE e tente novamente.";
+
+                console.log("Erro: " + error);
+            }
+        });
+    }
+}
+
+function coletarDadosSIGA(usuarioSIGA, senhaSIGA) {
+    // Realizando uma requisição assíncrona ao servidor usando jQuery AJAX, permitindo a coleta de dados do SIGA do aluno dinamicamente sem recarregar a página
     $.ajax({
         method: "POST",
-        url: "coletandoDadosSIGA",
+        url: "ColetarDadosSIGA",
         data: {
             usuarioSIGA: usuarioSIGA,
             senhaSIGA: senhaSIGA
         },
         success: function (response) {
-            let isColetandoDadosSIGASucesso = response;
-
-            if (isColetandoDadosSIGASucesso === "true") {
+            let mensagemResultadoColetaDadosSIGA = response;
+            
+            if (mensagemResultadoColetaDadosSIGA === "Sucesso coleta de dados") {
                 window.location.href = "aiChat.jsp";
             } else {
-                document.querySelector("#loadingModal").style.display = "none";
-                document.querySelector("#notificacaoErros").style.display = "block";
-                document.querySelector("#mensagemErro").innerHTML = "Desculpe, ocorreu um erro inesperado. Por favor, tente novamente mais tarde";
+                esconderOuExibirElemento("#notificacoesErros", "block");
+                esconderOuExibirElemento("#loadingModal", "none");
+                esconderOuExibirElemento("span#spanMensagemErroLogin", "block");
+                document.querySelector("span#spanMensagemErroLogin").innerHTML = "Desculpe, ocorreu um erro inesperado. Por favor, tente novamente mais tarde";
+
+                console.log(mensagemResultadoColetaDadosSIGA);
             }
         },
         error: function (xhr, status, error) {
-            alert("Desculpe, ocorreu um erro inesperado. Por favor, tente novamente mais tarde.");
+            esconderOuExibirElemento("#loadingModal", "none");
+            esconderOuExibirElemento("#notificacoesErros", "block");
+            esconderOuExibirElemento("span#spanMensagemErroLogin", "block");
+            document.querySelector("span#spanMensagemErroLogin").innerHTML = "Desculpe, ocorreu um erro inesperado. Por favor, tente novamente mais tarde";
+            
             console.log("Erro: " + error);
         }
     });
