@@ -1,0 +1,37 @@
+/* CSS presente na página aboutProject(sobre o projeto) */
+
+.about-project {
+    margin-top: 80px;
+    background-color: #f5dce2;
+    border: 10px solid transparent;
+    border-image: linear-gradient(to right, #66416c, #ee7895);
+    border-image-slice: 1;
+    height: auto;
+    width: auto;
+    padding: 20px;
+    margin-bottom: 80px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding-bottom: 0px;   
+}
+
+.about-project p {
+    font-size: 30px;
+    color: black;
+    padding-top: 30px;
+}
+
+.about-project a {
+    color: black;
+}
+.about-project a:hover {
+    color: white;
+}
+
+#lirio-rosa{
+    width: 500px;
+    padding-top: 0px;
+    /* Sombra que fica ao redor da flor */
+    filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.3));
+}

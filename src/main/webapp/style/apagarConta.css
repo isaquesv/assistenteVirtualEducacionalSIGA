@@ -1,0 +1,104 @@
+/* CSS presente na página apagarConta */
+
+.apagarConta {
+    margin-top: 100px;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    background-color: white;
+    border-radius: 20px;
+    padding: 20px;
+    width: 800px;
+    display: flex;
+    flex-direction: column;
+}
+
+.apagarConta h1 {
+    font-size: 60px;
+    color: white;
+    background: linear-gradient(to right, #66416c, #ee7895);
+    padding: 10px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    width: 800px;
+    margin-bottom: 0px;
+    margin-bottom: 30px;
+}
+
+.apagarConta p {
+    font-size: 30px;
+    color: black;
+}
+
+.apagarConta h3 {
+    font-size: 40px;
+    color: black;
+
+}
+
+.deleteButton {
+    margin-top: 30px;
+    background: linear-gradient(to right, #66416c, #ee7895);
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 25px;
+    width: auto;
+    height: auto;
+    padding: 10px;
+    justify-content: center;
+    border: none;
+}
+
+/* Modal excluir conta */
+/* título "excluir conta" */
+#modalExcluirContaLabel {
+    color: white;
+    font-size: 40px;
+}
+
+#modalExcluirConta {
+    color: white;
+    font-size: 30px;
+}
+
+/* texto "confirme novamente... */
+.modal-content {
+    color: black;
+    background-color: white;
+    height: auto;
+    width: auto;
+}
+
+/* esse é o "x"*/
+.modal-header {
+    color: white;
+    background: linear-gradient(to right, #66416c, #ee7895);
+    font-size: 30px;
+}
+
+.botaoNaoApagarConta,
+.botaoSimApagarConta {
+    height: auto;
+    width: auto;
+    padding: 10px;
+    font-size: 30px;
+    justify-content: center;
+    border: 0px;
+    color: white;
+    border-radius: 10px;
+}
+
+.botaoNaoApagarConta {
+    background-color: #66416c;
+}
+.botaoNaoApagarConta:hover {
+    box-shadow: inset 0px 4px 8px rgba(0, 0, 0, 0.3);
+}    
+
+.botaoSimApagarConta {
+    background-color: #ee7895;
+}
+.botaoSimApagarConta:hover {
+    box-shadow: inset 0px 4px 8px rgba(0, 0, 0, 0.3);
+}
