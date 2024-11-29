@@ -1,21 +1,36 @@
-//  Executando ações assim que o conteúdo do documento estiver carregado
-document.addEventListener("DOMContentLoaded", function () {
-    const mainConteudoPrincipal = document.querySelector("main.content");
-    const alturaNavbarPrincipal = document.querySelector("header.navbar").clientHeight;
-    const navbarMobile = document.querySelector("#navbarToggleExternalContent");
-    const buttonToggleNavbarMobile = document.querySelector("button.navbar-toggler");
+// Script JS presente em todas as páginas
+const elementoButtonFinalizarSessao = document.querySelector(".botaoSimFinalizarSessao");
 
-    mainConteudoPrincipal.style.marginTop = document.querySelector("header.navbar").clientHeight + "px";
+if (elementoButtonFinalizarSessao) {
+    elementoButtonFinalizarSessao.addEventListener("click", finalizarSessao);
+}
 
-    buttonToggleNavbarMobile.addEventListener("click", function () {
-        setTimeout(function () {
-            // Se a navbar mobile estiver visível
-            if (navbarMobile.classList.contains("show")) {
-                mainConteudoPrincipal.style.marginTop = 0;
-                navbarMobile.style.marginTop = alturaNavbarPrincipal + "px";
-            } else {
-                mainConteudoPrincipal.style.marginTop = alturaNavbarPrincipal + "px";
-            }
-        }, 5);
-    });
+window.addEventListener("resize", function () {
+    // Largura atual do body
+    let bodyWidth = document.body.clientWidth;
+
+    // Se a largura da tela for maior que 768 e a navbar mobile estiver visível
+    if (bodyWidth > 768 && document.querySelector("#navbarToggleExternalContent").classList.contains("show")) {
+        document.querySelector("#navbarToggleExternalContent").classList.remove("show");
+    }
 });
+
+function finalizarSessao() {
+    // Realizando uma requisição assíncrona ao servidor usando jQuery AJAX, permitindo encerrar a sessão do usuário dinamicamente sem recarregar a página
+    $.ajax({
+        method: "POST",
+        url: "FinalizarSessao",
+        success: function (response) {
+            let isSessaoFinalizada = response;
+
+            if (isSessaoFinalizada === "true") {
+                window.location.href = "index.jsp";
+            } else {
+                alert("Não foi possível encerrar sua sessão. Tente novamente mais tarde!");
+            }
+        },
+        error: function (xhr, status, error) {
+            console.log("Erro: " + error);
+        }
+    });
+}
