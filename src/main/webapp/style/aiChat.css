@@ -1,0 +1,158 @@
+/* CSS presente na página aiChat(Chat IA) */
+
+div.container header {
+    margin-top: 30px;
+    background-color: white;
+    padding: 20px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+body {
+    height: 115vh;
+}
+
+div.container footer {
+    background-color: white;
+    padding: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+div.container main {
+    height: 500px;
+    overflow-y: auto;
+    background: linear-gradient(to right, #66416c, #ee7895);
+}
+
+main.content div.container div#chatBackground {
+    width: 900px;
+    display: flex;
+    flex-direction: column;
+}
+
+/*  Caixa de mensagem */
+.message-container {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px 15px 20px;
+    border-radius: 10px;
+    background-color: white;
+    margin-bottom: 10px;
+    position: relative;
+    width: fit-content;
+    min-width: 50%;
+    max-width: 80%;
+}
+
+/*  Seta da caixa de mensagem */
+.message-arrow {
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    position: absolute;
+    top: 20%;
+    transform: translateY(-20%);
+}
+
+/*  Seta para a esquerda */
+.message-answer .message-arrow {
+    border-right: 10px solid white;
+    left: -10px;
+}
+
+/*  Seta para a direita */
+.message-question .message-arrow {
+    border-left: 10px solid white;
+    right: -10px;
+}
+
+#excluirConversa {
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    font-size: 20px;
+    background-color: #66416c;
+    color: white;
+    font-weight: 400;
+}
+
+#enviarPergunta {
+    padding: 20px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    border-radius: 10px;
+    border: none;
+    font-size: 30px;
+    color: white;
+    background-color: #ee7895;
+    justify-content: center;
+}
+
+#inputPergunta {
+    font-size: 20px;
+}
+
+#inputPergunta:focus {
+    outline: none;
+    border: none;
+    box-shadow: none;
+}
+
+.message-container p {
+    font-size: 20px;
+}
+
+/* Modal excluir conversa */
+#modalExcluirConversa {
+    color: white;
+    font-size: 30px;
+}
+
+#modalExcluirConversaLabel {
+    color: white;
+    font-size: 40px;
+}
+
+/* texto "confirme novamente... */
+.modal-content {
+    color: black;
+    background-color: white;
+    height: auto;
+    width: auto;
+    padding: 0px;
+}
+
+/* esse é o "x"*/
+.modal-header {
+    color: white;
+    background: linear-gradient(to right, #66416c, #ee7895);
+    font-size: 30px;
+}
+
+.botaoNaoExcluirConversa,
+.botaoSimExcluirConversa {
+    height: auto;
+    width: auto;
+    font-size: 30px;
+    justify-content: center;
+    padding: 10px;
+    border: 0px;
+    color: white;
+    border-radius: 10px;
+}
+
+.botaoNaoExcluirConversa {
+    background-color: #66416c;
+}
+.botaoNaoExcluirConversa:hover {
+    box-shadow: inset 0px 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.botaoSimExcluirConversa {
+    background-color: #ee7895;
+}
+.botaoSimExcluirConversa:hover {
+    box-shadow: inset 0px 4px 8px rgba(0, 0, 0, 0.3);
+}
