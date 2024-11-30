@@ -83,7 +83,7 @@ function processarMensagem(promptAluno) {
                 if (respostaIA.includes("Erro na requisição: 429")) {
                     gerarElementoMensagem("Você realizou muitas solicitações em um curto período de tempo. Por favor, atualize a página, aguarde alguns minutos e tente novamente. Agradecemos pela compreensão!", 1);
                 } else if (respostaIA.includes("Erro na requisição: 400")) {
-                    gerarElementoMensagem("Houve um problema com a sua solicitação. Verifique se sua chave de acesso está correta, atualize a página e tente novamente.", 1);
+                    gerarElementoMensagem("Houve um problema com sua solicitação. Verifique se sua API KEY foi inserida corretamente, reinicie o projeto e tente novamente.", 1);
                 } else if (respostaIA.includes("Erro na requisição: 503")) {
                     gerarElementoMensagem("O serviço está temporariamente indisponível. Isso pode ser devido a manutenção ou sobrecarga do sistema. Por favor, atualize a página, espere alguns minutos e tente novamente. Agradecemos pela compreensão!", 1);
                 } else {
