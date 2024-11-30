@@ -469,15 +469,17 @@ public class ColetarDadosSIGA extends HttpServlet {
         for (WebElement elementoLinhaNotaParcial : elementosLinhasNotasParciais) {
             // A linha atual pode ser igual a:
             // Avaliação Data de Lançamento Nota (cabeçalho) ou
-            // P1 13/11/24 9,0 (valores avaliação)
+            // P1 13/11/24 8,8 (valores avaliação)
             String valorLinhaAtual = elementoLinhaNotaParcial.getText();
+            // Substituindo a "," por ".", para evitar erros futuros
+            valorLinhaAtual = valorLinhaAtual.replace(",", ".");
 
             // Verificando se a linha atual é um cabeçalho
             if (valorLinhaAtual.startsWith("Avaliação")) {
                 // Se já houver uma lista de notas parciais de uma matéria em progresso e a linha atual for um cabeçalho significa que a lista da matéria esta completa, e outra lista será iniciada.. Ex:
                 // Avaliação Data de Lançamento Nota
-                // P1 13/11/24 9,0
-                // P2 13/11/24 9,0
+                // P1 13/11/24 8.8
+                // P2 13/11/24 8.8
                 // Avaliação Data de Lançamento Nota (outro cabeçalho, ou seja: a lista esta completa)
                 if (valoresNotas != null) {
                     notasParciaisPlanoDeEnsino.put(new JSONObject().put("nota_parcial", valoresNotas));
