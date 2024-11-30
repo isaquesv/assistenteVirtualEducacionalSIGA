@@ -171,6 +171,10 @@ public class IAGemini {
         SYSTEM_INSTRUCTIONS.put(new JSONObject()
             .put("instrução", "Se o aluno perguntar quantas faltas ele pode ter em cada matéria, o sistema deve acessar o plano de ensino e exibir ao aluno o limite de faltas e também a quantidade de faltas atuais de cada matéria.")
         );
+        // (notas parciais de cada matéria)
+        SYSTEM_INSTRUCTIONS.put(new JSONObject()
+            .put("instrução", "Sempre que o aluno perguntar sobre suas notas ou notas parciais em disciplinas do seu plano de ensino atual, informe apenas o nome de cada avaliação e a respectiva nota dessa avaliação, conforme registrada na lista de notas parciais da disciplina solicitada. Não realize nenhum tipo de cálculo, como médias ou arredondamentos, e não omita nenhuma avaliação, incluindo aquelas sem nota (nota 0 ou ainda não atribuída). Para as avaliações sem nota, exiba o nome da avaliação com a nota 0 ou conforme a ausência de valor, se aplicável.")
+        );
         // Capturando matérias de dias futuros
         SYSTEM_INSTRUCTIONS.put(new JSONObject()
             .put("instrução",
