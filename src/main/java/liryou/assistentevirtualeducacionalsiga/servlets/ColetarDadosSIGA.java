@@ -491,7 +491,7 @@ public class ColetarDadosSIGA extends HttpServlet {
                     String[] valores = valorLinhaAtual.split(" "); // Ex: P1 13/11/24 8.8
                     
                     // Juntando as partes do array em uma única string, com vírgulas separando os valores e adicionando essa string à lista de notas
-                    valoresNotas.add(String.join(", ", valores)); // Ex: P1 13/11/24 8.8
+                    valoresNotas.add(String.join(", ", valores)); // Ex: P1, 13/11/24, 8.8
                 }
             }
         }
