@@ -28,9 +28,6 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /** @author Liryou */
 @WebServlet(name = "ColetarDadosSIGA", urlPatterns = {"/ColetarDadosSIGA"})
 public class ColetarDadosSIGA extends HttpServlet {
@@ -80,7 +77,6 @@ public class ColetarDadosSIGA extends HttpServlet {
     static List<String> listaFrequenciasDisciplinasHistoricoCompleto = new ArrayList<>();
     static List<Integer> listaQuantidadesFaltasDisciplinasHistoricoCompleto = new ArrayList<>();
     static List<String> listaObservacoesDisciplinasHistoricoCompleto = new ArrayList<>();
-    static List<String> listaHorarios = new ArrayList<>();
    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -414,8 +410,11 @@ public class ColetarDadosSIGA extends HttpServlet {
     }
     
     private static void coletarValoresHorarios(HtmlUnitDriver driverNavegador) {
-        // Array com os seletores CSS para os horários dos dias da semana
-        String[] seletores = {
+        String[] diasDaSemana = { "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado" };
+        
+        // Array com os seletores CSS para capturar as informações de horários de cada dia da semana
+        // Ignorando a primeira linha, que contém o cabeçalho de cada tabela
+        String[] seletoresDiasDaSemana = {
             "#Grid2ContainerTbl tr:not(:nth-child(1)) span", // Segunda-feira
             "#Grid3ContainerTbl tr:not(:nth-child(1)) span", // Terça-feira
             "#Grid4ContainerTbl tr:not(:nth-child(1)) span", // Quarta-feira
@@ -423,55 +422,48 @@ public class ColetarDadosSIGA extends HttpServlet {
             "#Grid6ContainerTbl tr:not(:nth-child(1)) span", // Sexta-feira
             "#Grid7ContainerTbl tr:not(:nth-child(1)) span"  // Sábado
         };
-        
-        for (int i = 0; i < seletores.length; i++) {
-            // Capturando todos os <span> (Horário, Disciplina e Turma) que estão dentro das linhas de cada dia da semana
-            // Ex: 15:00-15:50  POO  A
-            // Ex: 15:50-16:40  POO  A
-            List<WebElement> elementosSpansHorariosDisciplinasETurmasNoDia = driverNavegador.findElements(By.cssSelector(seletores[i]));
 
-            // StringBuilder para organizar os horários do dia atual
-            StringBuilder valoresHorariosAulaBuilder = new StringBuilder();
-            int contador = 1;
+        for (int i = 0; i < seletoresDiasDaSemana.length; i++) {
+            // Capturando todos os elementos <span>, sendo eles horários, disciplinas e turmas, de cada linha de horário do dia atual
+            // Exemplo de linha de horário: <span>15:00-15:50</span> <span>POO</span> <span>A</span>
+            List<WebElement> elementosSpansHorariosDisciplinasETurmasNoDia = driverNavegador.findElements(By.cssSelector(seletoresDiasDaSemana[i]));
 
-            // Verificando se a lista de <span> está vazia
+            // Criando um JSONArray para armazenar os horários do dia atual
+            JSONArray horariosDoDiaAtual = new JSONArray();
+
             if (!elementosSpansHorariosDisciplinasETurmasNoDia.isEmpty()) {
-                for (WebElement elementoSpanHorarioDisciplinaETurmaNoDia : elementosSpansHorariosDisciplinasETurmasNoDia) {
-                    // Adicionando o texto de cada <span> (Horário, Disciplina ou Turma) à string
-                    valoresHorariosAulaBuilder.append(verificarElementoVazio(elementoSpanHorarioDisciplinaETurmaNoDia));
+                // Processando cada linha de horário do dia atual
+                for (int j = 0; j < elementosSpansHorariosDisciplinasETurmasNoDia.size(); j += 3) {
+                    // Criando um JSONObject para armazenar as informações da linha de horário atual
+                    JSONObject horarioDetalhado = new JSONObject();
 
-                    // Se o contador for menor que 3, adiciona uma vírgula; no terceiro elemento, adiciona um separador (" | ")
-                    // O motivo para isso é que a cada 3 elementos um novo horário é iniciado.. Ex:
-                    // 15:00-15:50,POO,A | 15:50-16:40,POO,A | ...
-                    if (contador < 3) {
-                        valoresHorariosAulaBuilder.append(",");
-                    } else {
-                        valoresHorariosAulaBuilder.append(" | ");
-                        contador = 0;
-                    }
+                    horarioDetalhado.put("dia_da_semana", diasDaSemana[i]);
+                    horarioDetalhado.put("horario", verificarElementoVazio(elementosSpansHorariosDisciplinasETurmasNoDia.get(j))); // Ex: 15:00-15:50
+                    horarioDetalhado.put("disciplina", verificarElementoVazio(elementosSpansHorariosDisciplinasETurmasNoDia.get(j + 1))); // Ex: POO
+                    horarioDetalhado.put("turma", verificarElementoVazio(elementosSpansHorariosDisciplinasETurmasNoDia.get(j + 2))); // Ex: A
 
-                    contador++;
+                    // Adicionando o JSONObject ao JSONArray do dia atual
+                    horariosDoDiaAtual.put(horarioDetalhado);
                 }
             }
-            // Adicionando os horários do dia atual a lista final
-            listaHorarios.add(valoresHorariosAulaBuilder.toString());
+
+            // Se o dia atual conter horários, adiciona-o ao JSONArray final
+            if (!horariosDoDiaAtual.isEmpty()) {
+                horariosPlanoDeEnsino.put(horariosDoDiaAtual);
+            }
         }
     }
     
     private static void coletarValoresNotasParciais(HtmlUnitDriver driverNavegador) {
         // Capturando todos os <tr>, que contêm o cabeçalho ("Avaliação Data de lançamento Nota") e seus respectivos valores
         List<WebElement> elementosLinhasNotasParciais = driverNavegador.findElements(By.cssSelector("tr.FreeStyleGridOdd table.Grid tr"));
-
-        // Variáveis para estado atual
-        String[] cabecalhos = null;
         List<String> valoresNotas = null;
 
         for (WebElement elementoLinhaNotaParcial : elementosLinhasNotasParciais) {
             // A linha atual pode ser igual a:
             // Avaliação Data de Lançamento Nota (cabeçalho) ou
-            // P1 13/11/24 8,8 (valores avaliação)
+            // P1 13/11/24 8,8 (valores avaliação) -- Exemplo
             String valorLinhaAtual = elementoLinhaNotaParcial.getText();
-            // Substituindo a "," por ".", para evitar erros futuros
             valorLinhaAtual = valorLinhaAtual.replace(",", ".");
 
             // Verificando se a linha atual é um cabeçalho
@@ -482,29 +474,33 @@ public class ColetarDadosSIGA extends HttpServlet {
                 // P2 13/11/24 8.8
                 // Avaliação Data de Lançamento Nota (outro cabeçalho, ou seja: a lista esta completa)
                 if (valoresNotas != null) {
-                    notasParciaisPlanoDeEnsino.put(new JSONObject().put("nota_parcial", valoresNotas));
+                    // Se a lista estiver completa ela é adicionada ao JSONArray
+                    notasParciaisPlanoDeEnsino.put(new JSONObject()
+                        .put("nota_parcial", valoresNotas)
+                    );
                 }
 
-                cabecalhos = valorLinhaAtual.split(" ");
-                // Criando uma nova lista para a próxima matéria
+                // Limpando a lista de notas, para que ela possa armazenar os valores da próxima matéria
                 valoresNotas = new ArrayList<>();
             }
             // Se a linha atual não for um cabeçalho
             else {
-                // Verificando se cabeçalhos e lista de valores foram inicializados
-                if (cabecalhos != null && valoresNotas != null) {
-                    // Divide a linha em partes usando espaço como separador
-                    String[] valores = valorLinhaAtual.split(" ");
-
-                    // Formata os valores separados por vírgulas e adiciona à lista
-                    valoresNotas.add(String.join(", ", valores));
+                // Verificando se a lista de notas foi inicializada
+                if (valoresNotas != null) {
+                    // Dividindo a linha atual em um array de strings, usando o espaço como separador
+                    String[] valores = valorLinhaAtual.split(" "); // Ex: P1 13/11/24 8.8
+                    
+                    // Juntando as partes do array em uma única string, com vírgulas separando os valores e adicionando essa string à lista de notas
+                    valoresNotas.add(String.join(", ", valores)); // Ex: P1 13/11/24 8.8
                 }
             }
         }
 
         // Adicionando a última lista processada ao JSONArray
         if (valoresNotas != null) {
-            notasParciaisPlanoDeEnsino.put(new JSONObject().put("nota_parcial", valoresNotas));
+            notasParciaisPlanoDeEnsino.put(new JSONObject()
+                .put("nota_parcial", valoresNotas)
+            );
         }
     }
 
@@ -578,47 +574,6 @@ public class ColetarDadosSIGA extends HttpServlet {
                 .put("quantidade_faltas_disciplina", listaQuantidadesFaltasDisciplinasHistoricoCompleto.get(i))
                 .put("observação_disciplina", listaObservacoesDisciplinasHistoricoCompleto.get(i))
             );
-        }
-
-        // Horários Plano de Ensino
-        String[] diasSemana = {"Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"};       
-        // Processando os valores da lista de horários
-        for (int i = 0; i < diasSemana.length; i++) {
-            String diaAtual = diasSemana[i];
-            String[] linhasDiaAtual = listaHorarios.get(i).split(" \\| ");
-
-            // Map para agrupar horários por turma e sigla, evitando duplicações
-            Map<String, JSONObject> turmaSiglaMap = new HashMap<>();
-
-            for (String linhaDiaAtual : linhasDiaAtual) {
-                if (!linhaDiaAtual.isEmpty()) {
-                    String[] valoresLinhaDiaAtual = linhaDiaAtual.split(",");
-                    
-                    String horarioLinhaDiaAtual = valoresLinhaDiaAtual[0];
-                    String siglaLinhaDiaAtual = valoresLinhaDiaAtual[1];
-                    String turmaLinhaDiaAtual = valoresLinhaDiaAtual[2];
-
-                    // Chave única baseada em "turma|sigla" para agrupar dados
-                    String chave = turmaLinhaDiaAtual + "|" + siglaLinhaDiaAtual;
-
-                    // Verifica se já existe um objeto para essa turma e sigla
-                    if (!turmaSiglaMap.containsKey(chave)) {
-                        JSONObject informacoesHorarioDisciplinaAtual = new JSONObject()
-                            .put("turma_disciplina", turmaLinhaDiaAtual)
-                            .put("sigla_disciplina", siglaLinhaDiaAtual)
-                            .put("dia_semana", diaAtual)
-                            .put("horários_disciplina", new JSONArray());
-
-                        turmaSiglaMap.put(chave, informacoesHorarioDisciplinaAtual);
-                    }
-
-                    // Adiciona o horário ao array de horários
-                    turmaSiglaMap.get(chave).getJSONArray("horários_disciplina").put(horarioLinhaDiaAtual);
-                }
-            }
-
-            // Adiciona os objetos do map ao JSON final
-            horariosPlanoDeEnsino.putAll(turmaSiglaMap.values());
         }
     }
     
