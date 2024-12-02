@@ -23,8 +23,8 @@
                     <h1>Login SIGA</h1>
                     <h2>Faça o login com o SIGA agora e inicie a conversa com o EduSIGA!</h2>
                     <div>
-                        <label for="usuarioLoginSIGA">CPF</label>
-                        <input type="text" id="usuarioLoginSIGA" name="usuarioLogin" placeholder="Digite seu CPF">
+                        <label for="usuarioLoginSIGA">Usuário</label>
+                        <input type="text" id="usuarioLoginSIGA" name="usuarioLogin" placeholder="Digite seu usuário">
                     </div>
 
                     <div>
