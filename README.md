@@ -20,11 +20,11 @@ Este projeto tem o objetivo de desenvolver um sistema integrado com a IA do <b>G
 
 # Status do projeto
 <p align="center">
-<img loading="lazy" src="https://img.shields.io/badge/STATUS-em_andamento-projeto?style=flat-square&logoColor=white&labelColor=%2366416c&color=%23ee7895"/>
+<img loading="lazy" src="https://img.shields.io/badge/STATUS-concluído-projeto?style=flat-square&logoColor=white&labelColor=%2366416c&color=%23ee7895"/>
 
 # Funcionalidades do projeto
 
-* 1ª funcionalidade: realizar login através do SIGA, inserindo o CPF e senha;
+* 1ª funcionalidade: realizar login através do SIGA, inserindo o seu usuário e senha;
 * 2ª funcionalidade: conversar com a IA assistente nomeada "EduSIGA", capacitada para responder perguntas sobre a FATEC de Praia Grande e seus cursos;
 * 3ª funcionalidade: apagar conversa com o EduSIGA a qualquer momento;
 * 4ª funcionalidade: o usuário poderá apagar sua conta a qualquer momento.
