@@ -1,6 +1,4 @@
 <%-- Navbar presente em todas as páginas --%>
-<%@page import="org.json.JSONArray"%>
-<%@page import="org.json.JSONObject"%>
 <%
     String urlAtual = request.getRequestURL().toString();
     String elementoFinalizarSessao = "";
